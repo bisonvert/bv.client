@@ -1,0 +1,30 @@
+Installation of the BisonVert client
+====================================
+
+Dependencies
+------------
+
+BisonVert depends on few existing django apps and packages:
+* python-oauth2, from http://github.com/ametaireau/python-oauth2
+* django-oauthclient, from http://bitbucket.org/makinacorpus/django-oauthclient
+* the excellent restkit lib, by Benoît Chesneau: http://github.com/benoitc/restkit/
+
+Installation
+------------
+
+First, you need to get the sources from our github or bitbucket account. there
+is also a mirror github powered repository here: , just in case.
+    
+
+Once the source fetched, you need to configure it:
+
+OAuth
+~~~~~
+Create a `settings_local.py` file, and fill it with these options::
+
+    # Session configuration
+    SESSION_COOKIE_NAME = 'youcookiename'
+
+    # settings for the local oauth consumer
+    OAUTHCLIENT_CONSUMER_KEY = "your.consumer.key.here"
+    OAUTHCLIENT_CONSUMER_SECRET = "you.consumer.secret.here"
