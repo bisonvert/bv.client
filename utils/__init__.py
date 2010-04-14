@@ -1,2 +1,2 @@
-def unicode_to_dict(request):
-    return dict([(key.__str__(),value) for key,value in request.items()])
+version_info = (0, 1, 0)
+__version__ =  ".".join(map(str, version_info))
