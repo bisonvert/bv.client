@@ -42,7 +42,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'libclient.ext.dj.AuthenticationMiddleware',
+    'bvlibclient.ext.dj.AuthenticationMiddleware',
 #    'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 

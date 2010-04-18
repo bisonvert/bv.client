@@ -10,10 +10,10 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from libclient import LibTrips, LibUsers, ResourceAccessForbidden, \
+from bvlibclient import LibTrips, LibUsers, ResourceAccessForbidden, \
     ResourceDoesNotExist, unicode_to_dict
 
-from libclient.ext.dj import inject_lib
+from bvlibclient.ext.dj import inject_lib
 
 from trips.misc import get_trip_dict
 
@@ -25,7 +25,6 @@ from forms import EditTripForm, SearchTripForm, TRIP_OFFER, TRIP_DEMAND, \
     TRIP_BOTH, EditTripOfferOptionsForm, EditTripDemandOptionsForm
 
 # utils
-from utils import unicode_to_dict
 import simplejson
 
 # gis imports
