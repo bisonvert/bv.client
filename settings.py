@@ -43,11 +43,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'bvlibclient.ext.dj.AuthenticationMiddleware',
-#    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-#    'django.core.context_processors.auth',
+    'django.core.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
@@ -62,6 +62,7 @@ ROOT_URLCONF = 'bvclient.urls'
 JS_EXT = '-min.js' if not DEBUG else '.js'
 
 INSTALLED_APPS = (
+    'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -71,15 +72,11 @@ INSTALLED_APPS = (
     'utils',
 )
 
-PERSISTENT_SESSION_KEY = 'bvclientsessionpersistant'
+PERSISTENT_SESSION_KEY = 'testtesttest'
+SESSION_COOKIE_NAME = 'bvclient'
 
 # OAUTH URLs
 BVCLIENT_OAUTH_APPID = 'bisonvert'
-
-OAUTH_SERVER_URL = "http://api.bisonvert.net"
-OAUTH_REQUEST_TOKEN_URL = '%s/oauth/request_token/' % OAUTH_SERVER_URL
-OAUTH_ACCESS_TOKEN_URL = '%s/oauth/access_token/' % OAUTH_SERVER_URL
-OAUTH_AUTHORIZE_URL = '%s/oauth/authorize/' % OAUTH_SERVER_URL
 
 # Map settings
 DEFAULT_MAP_CENTER_NAME = "France" 
