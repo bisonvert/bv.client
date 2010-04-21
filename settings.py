@@ -74,6 +74,8 @@ INSTALLED_APPS = (
 PERSISTENT_SESSION_KEY = 'bvclientsessionpersistant'
 
 # OAUTH URLs
+BVCLIENT_OAUTH_APPID = 'bisonvert'
+
 OAUTH_SERVER_URL = "http://api.bisonvert.net"
 OAUTH_REQUEST_TOKEN_URL = '%s/oauth/request_token/' % OAUTH_SERVER_URL
 OAUTH_ACCESS_TOKEN_URL = '%s/oauth/access_token/' % OAUTH_SERVER_URL

@@ -5,7 +5,8 @@ from django.conf import settings
 urlpatterns = patterns('',
     (r'^$', 'trips.views.home', {}, 'home'),
     (r'^trips/', include('trips.urls', namespace='trips')),
-    (r'^oauth/', include('oauthclient.urls', namespace='oauth'), {'identifier':'bisonvert'}),
+    (r'^oauth/', include('oauthclient.urls', namespace='oauth'),
+            {'identifier': getattr(settings, 'BVCLIENT_OAUTH_APPID', 'bisonvert')}),
 )
 
 # To serve static files. Do not use in production.
