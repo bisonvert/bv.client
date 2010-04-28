@@ -123,7 +123,6 @@
         var step;
         var text;
 		var geom;
-
         text = parseHTML("<b>{% trans "Departure" %}</b>:<br /> {{ trip.departure_city }}{% if trip.departure_address %}<br />{{ trip.departure_address }}{% endif %}");
 		geom = wkt.read('{{ trip.departure_point }}');
 		geom.style = departure_style;
