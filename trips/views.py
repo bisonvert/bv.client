@@ -12,9 +12,7 @@ from django.conf import settings
 # bvclient imports
 from bvlibclient import LibTrips, LibUsers, ResourceAccessForbidden, \
     ResourceDoesNotExist, unicode_to_dict
-
 from bvlibclient.ext.dj import inject_lib, is_bvoauthenticated
-
 from trips.misc import get_trip_dict
 
 # oauthclient decorators
@@ -30,7 +28,7 @@ import simplejson
 # gis imports
 from django.contrib.gis.geos import MultiPoint, GEOSGeometry
 
-DEFAULT_ITEMS_PER_PAGE = 10
+DEFAULT_ITEMS_PER_PAGE = settings.DEFAULT_ITEMS_PER_PAGE
 
 """This file contains all necessary material to interact with trips: search, 
 creation, list, edition.
@@ -100,7 +98,7 @@ def show_trip_results(request, trip_id=None, lib=None):
 
     if user.id != trip.user.id:
         raise Http404()
-
+    
     return render_to_response('show_trip_results.html', {
         'trip': trip,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
@@ -155,7 +153,7 @@ def list_trips(request, page=1, lib=None):
 
 @is_bvoauthenticated()
 @inject_lib(LibTrips)
-def my_trips(request, page=1, lib=None):
+def list_mine(request, page=1, lib=None):
     """List all trips for the current user.
     
     """

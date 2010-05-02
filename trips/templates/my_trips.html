@@ -60,15 +60,15 @@
                                 {{ trip.time|time:"H\h" }}
                             </td>
                             <td>
-                                {% if trip.offer_id and not trip.demand_id %}
+                                {% ifequal trip.trip_type 0 %}
                                 {% trans "Offer" %}
-                                {% else %}
-                                {% if not trip.offer_id and trip.demand_id %}
+                                {% endifequal %}
+                                {% ifequal trip.trip_type 1 %}
                                 {% trans "Demand" %}
-                                {% else %}
+                                {% endifequal %}
+                                {% ifequal trip.trip_type 2 %}
                                 {% trans "Both" %}
-                                {% endif %}
-                                {% endif %}
+                                {% endifequal %}
                             </td>
                             <td>
                                 {% if trip.alert %}

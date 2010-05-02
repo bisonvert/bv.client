@@ -1,7 +1,9 @@
 BisonVert client
 ================
 
-A simple django application client for the BisonVert carpooling service. 
+A simple django application client for the BisonVert carpooling service.
+
+Dependencies
 
 Dependencies
 ------------

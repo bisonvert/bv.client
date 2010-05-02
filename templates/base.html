@@ -30,17 +30,29 @@
 
         <div id="page-header">
             <h1 id="header">{% if WITH_TITLE_HEADER %}<a href="{% url carpool:home %}" title="{{ PROJECT_NAME }}"><span>{{ PROJECT_NAME }}</span></a>{% endif %}</h1>
-            <ul id="navigation">
-				<li><a{% ifequal current_item 1 %} class="current"{% endifequal %} href="{% url home %}">{% trans "Home" %}</a></li>
-				<li><a{% ifequal current_item 10 %} class="current"{% endifequal %} href="{% url trips:list_mine %}">{% trans "My Trips" %}</a></li>
+    <ul id="navigation">
+                {% if bvuser %}
+                <li><a href="{% url trips:list_mine %}">{% trans "My trips"%}</a></li>
+                <li><a href="{% url talks:list %}">{% trans "My talks" %}</a></li>
+                {% comment %}
+                <li><a href="{% url rating:list_user_reports %}">{% trans "My reports" %}</a></li>
+                {% endcomment %}
+                {% comment %}<li><a href="{% url bvserver:show_user_account %}">{% trans "My account" %}</a></li>{% endcomment %}
+                {% else %}
+                <li><a href="{% url oauth:login %}">{% trans "My account" %}</a></li>
+                {% endif %}
             </ul>
-<div id="user_connected">
-                <a href="/faq/">FAQ</a> |
-                
-                <a href="/logout/">Déconnexion</a> |
-                Connecté: ametaireau
-                
+
+            <div id="user_connected">
+                {% if bvuser %}
+                <a href="{% url oauth:logout %}">{% trans "Logout" %}</a> |
+                {% trans "Connected" %}: {{ bvuser.username }}
+                {% else %}
+                <a href="{% url oauth:login %}">{% trans "Login" %}</a> 
+                {% comment %} <a href="{% url oauth:register %}">{% trans "Registration" %}</a> {% endcomment %}
+                {% endif %}
             </div>
+        
 
         </div>
 

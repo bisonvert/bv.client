@@ -7,8 +7,8 @@ from forms import TRIP_OFFER, TRIP_DEMAND
 urlpatterns = patterns('trips.views',
     (r'^/$', 'home', {}, 'home'),
     
-    (r'^mine/(?P<page>\d+)/$', 'my_trips', {}, 'list_mine'),
-    (r'^mine/$', 'my_trips', {}, 'list_mine'),    
+    (r'^mine/(?P<page>\d+)/$', 'list_mine', {}, 'list_mine'),
+    (r'^mine/$', 'list_mine', {}, 'list_mine'),    
     
     (r'^show/(?P<trip_id>\d+)/$', 'show_trip', {}, 'show'),
     (r'^list/$', 'list_trips', {}, 'list'),    

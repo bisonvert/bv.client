@@ -12,7 +12,6 @@ MANAGERS = ADMINS
 DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = 'bvclient.sql'
 
-#
 TIME_ZONE = 'Europe/Paris'
 LANGUAGE_CODE = 'fr'
 SITE_ID = 1
@@ -52,6 +51,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'utils.context_processors.js_ext',
+    'bvlibclient.ext.dj.bvauth',
 #    'utils.context_processors.project_info',
 #    'utils.context_processors.get_google_analytics_info',
 #    'utils.context_processors.get_google_adsense_info',
@@ -68,8 +68,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'trips',
+    'talks', 
     'oauthclient',
     'utils',
+    'django_extensions',
 )
 
 PERSISTENT_SESSION_KEY = 'testtesttest'
@@ -82,6 +84,9 @@ BVCLIENT_OAUTH_APPID = 'bisonvert'
 DEFAULT_MAP_CENTER_NAME = "France" 
 DEFAULT_MAP_CENTER_POINT = "POINT( 2.213749 46.227638 )" 
 DEFAULT_MAP_CENTER_ZOOM = 5 
+
+# pagination params
+DEFAULT_ITEMS_PER_PAGE = 10
 
 try:
     from local_settings import *
