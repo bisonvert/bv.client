@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bvlibclient import LibTalks, LibUsers, Talk, Message
+from bvlibclient import LibTalks, LibUsers, LibTrips
 from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
 
 # bvclient imports
@@ -46,18 +46,25 @@ def contact_user(request, trip_id=None, lib=None):
 
     """
     if lib.talk_exists_for_trip(trip_id):
-        return redirect('talks:send_message', args=[trip_id])
+        return redirect('talks:add_message', int(trip_id))
 
     if request.POST :
         form = ContactUserForm(data=request.POST)
-        lib.create_talk(trip_id, message)
+        if form.is_valid():
+            talk_id = lib.create_talk(trip_id, form.cleaned_data['message'])
+            return redirect('talks:list_messages', talk_id)
     else:
         # check if a conversation about this trip already exists
         form = ContactUserForm()
+    
+    libtrips = LibTrips(**lib.get_params())
+    trip  = libtrips.get_trip(trip_id)
 
     return render_to_response('contact_user.html', {
+        'from_user' : request.bvuser,
+        'to_user' : trip.user,
         'form' : form,
-        'trip_id': trip_id,
+        'trip': trip,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
@@ -71,7 +78,7 @@ def list_messages(request, page=1, talk_id=None, lib=None):
         if form.is_valid():
             lib.add_message_to_talk(talk_id=talk_id, 
                 message=form.cleaned_data['message'])
-            return redirect("talks:list_messages", args=[talk_id])
+            return redirect("talks:list_messages", talk_id)
     else:
         form = ContactUserForm()
     
@@ -92,7 +99,7 @@ def list_messages(request, page=1, talk_id=None, lib=None):
 
 @need_bvoauth_authentication()
 @inject_lib(LibTalks)
-def cancel_talk(self, talk_id, lib):
+def cancel_talk(request, talk_id=None, lib=None):
     """Cancel the negociation talk.
 
     Cancelling a negociation talk must have a reason, so we use the contact
@@ -101,12 +108,13 @@ def cancel_talk(self, talk_id, lib):
     """
     if request.POST:
         form = ContactUserForm(data=request.POST)
-        lib.cancel_talk(talk_id=talk_id, message=form.message)
-        redirect("talks:list_messages", args=[talk_id])
+        if form.is_valid():
+            lib.delete_talk(talk_id, form.cleaned_data['message'])
+            return redirect("talks:list")
     else:
-        talk = lib.get_talk_by_id(talk_id)
         form = ContactUserForm()
 
+    talk = lib.get_talk(talk_id)
     return render_to_response('cancel_talk.html', {
         'talk' : talk,
         'form' : form,
@@ -114,9 +122,9 @@ def cancel_talk(self, talk_id, lib):
 
 @need_bvoauth_authentication()
 @inject_lib(LibTalks)
-def validate_talk(request, talk_id, lib):
-    try:
-        lib.validate_talk(talk_id)
-        return redirect('talks:confirm_validate')
-    except bvlibclient.BvLibClientException:
-        raise Http404
+def validate_talk(request, talk_id=None, lib=None):
+    """Validate the talk
+
+    """
+    lib.validate_talk(talk_id)
+    return redirect('talks:confirm_validate')

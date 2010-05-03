@@ -176,6 +176,7 @@ def show_trip(request, trip_id=None, lib=None):
         'trip': lib.get_trip(trip_id),
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
+        'authenticated': is_bvoauth_authenticated(request),
     }, context_instance=RequestContext(request))
 
 

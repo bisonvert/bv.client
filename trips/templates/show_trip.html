@@ -18,7 +18,7 @@
                 <span class="label">{% trans "Trip author" %}:</span> {{ trip.user.username }}
                 <span class="mark">{{ user_mark }}</span>
                 <br />
-                {% if user.is_authenticated %}
+                {% if authenticated %}
                 <a href="{% url talks:contact_user trip.id %}">{% trans "Contact this carpool user" %}</a>
                 {% else %}
                 <a href="">{% trans "Please login to contact this carpool user" %}</a>
