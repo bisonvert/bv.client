@@ -12,7 +12,8 @@ from django.conf import settings
 # bvclient imports
 from bvlibclient import LibTrips, LibUsers, ResourceAccessForbidden, \
     ResourceDoesNotExist, unicode_to_dict
-from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
+from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication, \
+    is_bvoauth_authenticated
 from trips.misc import get_trip_dict
 
 # forms
@@ -123,7 +124,7 @@ def display_matching_trips(request, trip_id=None, lib=None):
         trips = trip_offers
     
     response_dict = {
-        'authenticated': not is_bvoauth_authenticated(request),
+        'authenticated': is_bvoauth_authenticated(request),
     }
     if not trip_id:
         response_dict['trips'] = to_json(trips)
@@ -170,6 +171,7 @@ def show_trip(request, trip_id=None, lib=None):
     """display informations about a trip
 
     """
+
     return render_to_response('show_trip.html', {
         'trip': lib.get_trip(trip_id),
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
