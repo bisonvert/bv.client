@@ -62,23 +62,25 @@ ROOT_URLCONF = 'bvclient.urls'
 JS_EXT = '-min.js' if not DEBUG else '.js'
 
 INSTALLED_APPS = (
+    # external
     'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+
+    # internal
     'trips',
     'talks', 
     'oauthclient',
     'utils',
-    'django_extensions',
 )
 
 PERSISTENT_SESSION_KEY = 'testtesttest'
 SESSION_COOKIE_NAME = 'bvclient'
 
-# OAUTH URLs
-BVCLIENT_OAUTH_APPID = 'bisonvert'
+# OAUTH settings.
+BVCLIENT_OAUTH_APPID = 'bisonvert' # must match to oauthclient token identifier
 
 # Map settings
 DEFAULT_MAP_CENTER_NAME = "France" 

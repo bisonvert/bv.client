@@ -1,4 +1,5 @@
 .pyc
-.db
+.sql
 oauthclient
 libclient
+local_settings.py

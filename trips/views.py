@@ -12,11 +12,8 @@ from django.conf import settings
 # bvclient imports
 from bvlibclient import LibTrips, LibUsers, ResourceAccessForbidden, \
     ResourceDoesNotExist, unicode_to_dict
-from bvlibclient.ext.dj import inject_lib, is_bvoauthenticated
+from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
 from trips.misc import get_trip_dict
-
-# oauthclient decorators
-from oauthclient.utils import is_oauthenticated, oauth_need_authentication
 
 # forms
 from forms import EditTripForm, SearchTripForm, TRIP_OFFER, TRIP_DEMAND, \
@@ -85,7 +82,7 @@ def search_trip(request, trip_type):
         'OFFER': TRIP_OFFER,
     }, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def show_trip_results(request, trip_id=None, lib=None):
     """Display information about the given trip and provides way to query the API
@@ -126,7 +123,7 @@ def display_matching_trips(request, trip_id=None, lib=None):
         trips = trip_offers
     
     response_dict = {
-        'authenticated': not oauth_need_authentication(request),
+        'authenticated': not is_bvoauth_authenticated(request),
     }
     if not trip_id:
         response_dict['trips'] = to_json(trips)
@@ -151,7 +148,7 @@ def list_trips(request, page=1, lib=None):
         'listpages': range(1, count // items_per_page +2),
     }, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def list_mine(request, page=1, lib=None):
     """List all trips for the current user.
@@ -180,7 +177,7 @@ def show_trip(request, trip_id=None, lib=None):
     }, context_instance=RequestContext(request))
 
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def create_trip(request, trip_id=None, trip_from_search=False, lib=None):
     """Creates/Edit a trip.
@@ -294,7 +291,7 @@ def create_trip(request, trip_id=None, trip_from_search=False, lib=None):
 
     return render_to_response('add_trip.html', view_dict, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def save_search(request, lib):
     """Display a page with all information about the trip.
@@ -304,7 +301,7 @@ def save_search(request, lib):
     """
     return create_trip(request, trip_from_search=True)
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def create_return_trip(request, trip_id=None, lib=None):
     """Given an existing trip, pre-fill the field to create a return trip and
@@ -320,7 +317,7 @@ def edit_trip(request, trip_id=None):
     """
     return create_trip(request, trip_id)
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def delete_trip(request, trip_id=None, lib=None):
     """Deletes an existing trip.
@@ -348,7 +345,7 @@ def get_city(request, lib):
         return HttpResponse('<ul>%s</ul>' % ''.join(['<li>%s</li>' % u"%s (%02d)" % (city['name'], city['zipcode']/1000) for city in cities]))
 
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTrips)
 def switch_trip_alert(request, trip_id=None, lib=None):
     """Switch the alert on/off for a specific trip.

@@ -7,7 +7,7 @@ from django.conf import settings
 
 # bvclient imports
 from bvlibclient import LibTalks, LibUsers, Talk, Message
-from bvlibclient.ext.dj import inject_lib, is_bvoauthenticated
+from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
 
 # bvclient imports
 from talks.forms import ContactUserForm
@@ -15,7 +15,7 @@ from talks.forms import ContactUserForm
 DEFAULT_ITEMS_PER_PAGE = settings.DEFAULT_ITEMS_PER_PAGE
 items_per_page = getattr(settings, 'TALKS_PER_PAGE', DEFAULT_ITEMS_PER_PAGE)
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTalks)
 def list_talks(request, page=1, lib=None):
     """Request all the talks of the logged user.
@@ -29,7 +29,7 @@ def list_talks(request, page=1, lib=None):
         'listpages': range(1, count // items_per_page +2),
     }, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTalks)
 def contact_user(request, trip_id=None, lib=None):
     """Create a new negociation about an announce
@@ -60,7 +60,7 @@ def contact_user(request, trip_id=None, lib=None):
         'trip_id': trip_id,
     }, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTalks)
 def list_messages(request, page=1, talk_id=None, lib=None):
     """Add a message to an existing talk.
@@ -90,7 +90,7 @@ def list_messages(request, page=1, talk_id=None, lib=None):
         'messages': messages,
     }, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTalks)
 def cancel_talk(self, talk_id, lib):
     """Cancel the negociation talk.
@@ -112,7 +112,7 @@ def cancel_talk(self, talk_id, lib):
         'form' : form,
     }, context_instance=RequestContext(request))
 
-@is_bvoauthenticated()
+@need_bvoauth_authentication()
 @inject_lib(LibTalks)
 def validate_talk(request, talk_id, lib):
     try:
