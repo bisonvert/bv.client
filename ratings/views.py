@@ -20,12 +20,20 @@ def render_template(template, context, request):
     context_instance=RequestContext(request))
 
 @inject_lib(LibRatings)
-def list_ratings(request, method, template, template_variable_name="ratings", page=1, lib=None):
+def list_ratings(request, method, template, template_variable_name="ratings", 
+    page=1, extra_context={}, lib=None):
     """Return a simple template with a variable set to the lib method `method`.
 
+    Accepts: 
+        * a template_variable_name to set up the name of the variable to set in
+          the template.
+        * a template name to set up the template to use
+        * page for the pagination purposes.
+        * extra_context, to set up extra information in the context.
+
     """
-    objects = getattr(lib, method)()
-    return render_template(template,{template_variable_name: objects}, request)
+    extra_context[template_variable_name] = getattr(lib, method)()
+    return render_template(template,extra_context, request)
 
 @inject_lib(LibRatings)
 def rate_user(request, temprating_id=None, lib=None):

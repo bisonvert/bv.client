@@ -62,11 +62,11 @@
                             <td>
                                 {% if tempreport.opened %}
                                 {% ifequal tempreport.user1.id bvuser.id %}
-                                {% if not tempreport.report1_mark %}
+                                {% if not tempreport.report1_creation_date %}
                                 <a href="{% url ratings:rate_user tempreport.id %}" title="{% trans "Rate this carpool user" %}"><img src="{{ MEDIA_URL }}img/rate.png" alt="{% trans "Rate this carpool user" %}" /></a>
                                 {% endif %}
                                 {% else %}
-                                {% if not tempreport.report2_mark %}
+                                {% if not tempreport.report2_creation_date %}
                                 <a href="{% url ratings:rate_user tempreport.id %}" title="{% trans "Rate this carpool user" %}"><img src="{{ MEDIA_URL }}img/rate.png" alt="{% trans "Rate this carpool user" %}" /></a>
                                 {% endif %}
                                 {% endifequal %}

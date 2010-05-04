@@ -1,5 +1,6 @@
 .pyc
 .sql
+django
 oauthclient
 libclient
 local_settings.py
