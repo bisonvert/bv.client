@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     # internal
     'trips',
     'talks', 
+    'ratings', 
     'oauthclient',
     'utils',
 )

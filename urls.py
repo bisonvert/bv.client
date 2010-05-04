@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     (r'^$', 'trips.views.home', {}, 'home'),
     (r'^trips/', include('trips.urls', namespace='trips')),
     (r'^talks/', include('talks.urls', namespace='talks')),
+    (r'^ratings/', include('ratings.urls', namespace='ratings')),
     (r'^oauth/', include('oauthclient.urls', namespace='oauth', app_name='bvoauth'),
             {'identifier': getattr(settings, 'BVCLIENT_OAUTH_APPID', 'bisonvert')}),
 

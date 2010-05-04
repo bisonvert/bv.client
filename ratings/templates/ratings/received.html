@@ -1,0 +1,41 @@
+{% extends "ratings/base.html" %}
+{% load i18n %}
+
+{% block rating_content %}
+                <h3>{% trans "Received reports" %}</h3>
+
+                {% if ratings %}
+                
+                <table id="my_reports_list" class="pg_list">
+                    <thead>
+                        <tr>
+                            <th><a href="{% url ratings:received 1 %}{{ get_url_pg }}&order={% ifequal order 'date' %}-{% endifequal %}date"{% ifequal order 'date' %} class="ascending"{% else %}{% ifequal order '-date' %} class="descending"{% endifequal %}{% endifequal %}>{% trans "Date" %}</a></th>
+                            <th class="user"><a href="{% url ratings:received 1 %}{{ get_url_pg }}&order={% ifequal order 'user' %}-{% endifequal %}user"{% ifequal order 'user' %} class="ascending"{% else %}{% ifequal order '-user' %} class="descending"{% endifequal %}{% endifequal %}>{% trans "Evaluated by carpool user" %}</a></th>
+                            <th><a href="{% url ratings:received 1 %}{{ get_url_pg }}&order={% ifequal order 'mark' %}-{% endifequal %}mark"{% ifequal order 'mark' %} class="ascending"{% else %}{% ifequal order '-mark' %} class="descending"{% endifequal %}{% endifequal %}>{% trans "Mark" %}</a></th>
+                            <th><a href="{% url ratings:received 1 %}{{ get_url_pg }}&order={% ifequal order 'comment' %}-{% endifequal %}comment"{% ifequal order 'comment' %} class="ascending"{% else %}{% ifequal order '-comment' %} class="descending"{% endifequal %}{% endifequal %}>{% trans "Comment" %}</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for report in ratings %}
+                        <tr class="{% cycle 'row1' 'row2' %}{% if tempreport.is_opened %} opened{% endif %}">
+                            <td>
+                                {{ report.creation_date|date:"d/m/Y" }}
+                            </td>
+                            <td>
+                                {{ report.from_user.username }}
+                            </td>
+                            <td>
+                                <span class="mark">{{ report.get_mark }}</span>
+                            </td>
+                            <td>
+                                {{ report.comment|linebreaks }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                {% trans "No Report." %}
+                {% endif %}
+{% endblock %}
