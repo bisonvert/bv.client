@@ -11,6 +11,9 @@ DOT = '.'
 ON_EACH_SIDE = 3
 ON_ENDS = 2
 
+def compute_nb_pages(total, items_per_page):
+    additionnal = 0 if (total % items_per_page == 0) else 1
+    return range(1, total / items_per_page + additionnal +1)
 
 class PaginatorRender(object):
     """Objet custom de pagination.

@@ -9,8 +9,8 @@ from django.conf import settings
 from bvlibclient import LibTalks, LibUsers, LibTrips
 from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
 
-# bvclient imports
 from talks.forms import ContactUserForm
+from utils.paginator import compute_nb_pages
 
 DEFAULT_ITEMS_PER_PAGE = settings.DEFAULT_ITEMS_PER_PAGE
 items_per_page = getattr(settings, 'TALKS_PER_PAGE', DEFAULT_ITEMS_PER_PAGE)
@@ -26,7 +26,7 @@ def list_talks(request, page=1, lib=None):
         'talks': lib.list_talks(page, items_per_page), 
         'count': count, 
         'page': int(page),
-        'listpages': range(1, count // items_per_page +2),
+        'listpages': compute_nb_pages(count, items_per_page),
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()

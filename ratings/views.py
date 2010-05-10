@@ -11,6 +11,7 @@ from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
 
 # ratings imports
 from ratings.forms import ReportForm
+from utils.paginator import compute_nb_pages
 
 DEFAULT_ITEMS_PER_PAGE = settings.DEFAULT_ITEMS_PER_PAGE
 items_per_page = getattr(settings, 'RATINGS_PER_PAGE', DEFAULT_ITEMS_PER_PAGE)

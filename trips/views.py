@@ -15,6 +15,7 @@ from bvlibclient import LibTrips, LibUsers, ResourceAccessForbidden, \
 from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication, \
     is_bvoauth_authenticated
 from trips.misc import get_trip_dict
+from utils.paginator import compute_nb_pages
 
 # forms
 from forms import EditTripForm, SearchTripForm, TRIP_OFFER, TRIP_DEMAND, \
@@ -97,6 +98,8 @@ def show_trip_results(request, trip_id=None, lib=None):
     if user.id != trip.user.id:
         raise Http404()
     
+    from ipdb import set_trace
+    set_trace()
     return render_to_response('show_trip_results.html', {
         'trip': trip,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
@@ -163,7 +166,7 @@ def list_mine(request, page=1, lib=None):
         'trips': lib.list_user_trips(page, items_per_page), 
         'count': count,
         'page': int(page),
-        'listpages': range(1, count // items_per_page +2),
+        'listpages': compute_nb_pages(count, items_per_page),
     }, context_instance=RequestContext(request))
 
 @inject_lib(LibTrips)
@@ -345,8 +348,8 @@ def get_city(request, lib):
     if 'value' in request.POST:
         value = request.POST['value']
         cities = lib.get_cities(value)
-        return HttpResponse('<ul>%s</ul>' % ''.join(['<li>%s</li>' % u"%s (%02d)" % (city['name'], city['zipcode']/1000) for city in cities]))
-
+        return HttpResponse('<ul>%s</ul>' % ''.join(['<li>%s</li>' % u"%s (%02d)" 
+            % (city['name'], city['zipcode']/1000) for city in cities]))
 
 @need_bvoauth_authentication()
 @inject_lib(LibTrips)
@@ -358,7 +361,23 @@ def switch_trip_alert(request, trip_id=None, lib=None):
     lib.set_alert(trip_id, not trip.alert)
     response_dict = {'status': 'ok', 'alert': not trip.alert} 
     resp = HttpResponse() 
-    simplejson.dump(response_dict , resp, ensure_ascii=False, separators=(',',':')) 
+    simplejson.dump(response_dict , resp, ensure_ascii=False,
+        separators=(',',':')) 
 
     return resp
-    
+
+@inject_lib(LibTrips)
+def calculate_buffer(request, lib):
+    response_dict = lib.calculate_buffer(
+        unicode_to_dict(dict(request.REQUEST.items())))
+
+    resp = HttpResponse()
+    simplejson.dump(response_dict, 
+        resp, ensure_ascii=False, separators=(',',':'))
+
+    return resp
+
+@inject_lib(LibTrips)
+def ogcserver(request, lib):
+    return HttpResponse(lib.ogcserver(
+        unicode_to_dict(dict(request.REQUEST.items()))))
