@@ -288,7 +288,7 @@ function getSimpleTripBuffer(simple_trip_route, radius, wait_id, trip_layer) {
     if (wait_id) {
         $(wait_id).show();
     }
-    new Ajax.Request('/ajax/calculate_buffer/', { method:'post',
+    new Ajax.Request('/trips/calculate_buffer/', { method:'post',
         parameters: {
             geometry: wkt.write(new OpenLayers.Feature.Vector(simple_trip_route)),
             radius: radius
@@ -660,7 +660,7 @@ var TripUpdater = Class.create({
         if (this.trip_type == TYPE_DEMAND) {
             return;
         }
-        var trip = new OpenLayers.Layer.WMS("Trip", '/ogcserver/?trip_id='+trip_id, {
+        var trip = new OpenLayers.Layer.WMS("Trip", '/trips/ogcserver/?trip_id='+trip_id, {
                 layers: 'trip_'+trip_id,
                 format: 'image/png',
                 transparent: 'TRUE',

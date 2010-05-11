@@ -29,5 +29,6 @@ urlpatterns = patterns('trips.views',
     (r'^get_matching_trips/$', 'display_matching_trips', {}, 'display_maching_trips'),
     (r'^get_matching_trips/(?P<trip_id>\d+)/$', 'display_matching_trips', {}, 'display_maching_trips'),
     (r'^switch_alert/(?P<trip_id>\d+)/$', 'switch_trip_alert', {}, 'switch_trip_alert'),
-    
+    (r'^calculate_buffer/', 'calculate_buffer', {}, 'calculate_buffer'),
+    (r'^ogcserver/', 'ogcserver', {}, 'ogcserver'),
 )

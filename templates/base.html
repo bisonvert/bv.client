@@ -31,6 +31,7 @@
         <div id="page-header">
             <h1 id="header">{% if WITH_TITLE_HEADER %}<a href="{% url carpool:home %}" title="{{ PROJECT_NAME }}"><span>{{ PROJECT_NAME }}</span></a>{% endif %}</h1>
     <ul id="navigation">
+                <li><a href="{% url home %}">{% trans "Home"%}</a></li>
                 {% if bvuser %}
                 <li><a href="{% url trips:list_mine %}">{% trans "My trips"%}</a></li>
                 <li><a href="{% url talks:list %}">{% trans "My talks" %}</a></li>

@@ -98,8 +98,6 @@ def show_trip_results(request, trip_id=None, lib=None):
     if user.id != trip.user.id:
         raise Http404()
     
-    from ipdb import set_trace
-    set_trace()
     return render_to_response('show_trip_results.html', {
         'trip': trip,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
@@ -380,4 +378,4 @@ def calculate_buffer(request, lib):
 @inject_lib(LibTrips)
 def ogcserver(request, lib):
     return HttpResponse(lib.ogcserver(
-        unicode_to_dict(dict(request.REQUEST.items()))))
+        unicode_to_dict(dict(request.REQUEST.items()))), content_type="image/png")

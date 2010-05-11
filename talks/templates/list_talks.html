@@ -13,7 +13,6 @@
                 {% endfor %}
                 &nbsp;&nbsp;{{ count }} talks
                 </p>
-
                 <table id="my_talk_list" class="pg_list">
                     <thead>
                         <tr>
@@ -82,7 +81,7 @@
                                 <a href="{% url talks:add_message talk.id %}#nouveau_message" title="{% trans "Send a new message" %}"><img src="{{ MEDIA_URL }}img/icons/send.png" alt="{% trans "Send a new message" %}" /></a>
                                 <a href="{% url talks:cancel talk.id %}" title="{% trans "Cancel talk" %}"><img src="{{ MEDIA_URL }}img/icons/drop.png" alt="{% trans "Cancel talk" %}" /></a>
                                 <a href="{% url talks:validate talk.id %}" title="{% trans "Validate talk" %}"><img src="{{ MEDIA_URL }}img/icons/validate.png" alt="{% trans "Validate talk" %}" /></a>
-                            </td>tr
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

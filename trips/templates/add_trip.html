@@ -183,10 +183,10 @@ Ces critères optionnels ont pour but de nous aider à classer les annonces qui 
 				geom
             );
             trip[trip.length] = step;
-            {% for cp in checkpointlist %}
+            {% for cp in trip.offer.checkpoints %}
             text = '{% blocktrans with forloop.counter as count %}Check point n°{{ count }}{% endblocktrans %}';
             text += '<br /><br /><span class="info"><a href="javascript:removeStep('+{{ forloop.counter }}+')">{% trans "Delete" %}</a></span>';
-            geom = wkt.read('{{ cp.point }}');
+            geom = wkt.read('{{ cp }}');
 			geom.style = step_style;
 			geom.attributes = {id: {{ forloop.counter }}, name: text}
 			step = new Step(
@@ -200,7 +200,7 @@ Ces critères optionnels ont pour but de nous aider à classer les annonces qui 
             text = parseHTML("<b>{% trans "Arrival" %}</b>:<br /> {{ trip.arrival_city }}{% if trip.arrival_address %}<br />{{ trip.arrival_address }}{% endif %}");
 			geom = wkt.read('{{ trip.arrival_point }}');
 			geom.style = arrival_style;
-			geom.attributes = {id: {{ checkpointlist|length }}+1, name: text};
+			geom.attributes = {id: {{ trip.offer.checkpoints|length }}+1, name: text};
 
             step = new Step(
                 parseHTML("{{ trip.arrival_city }}"),
