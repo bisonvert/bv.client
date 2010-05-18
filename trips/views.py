@@ -47,7 +47,8 @@ def home(request, lib):
         form = SearchTripForm()
         
     return render_to_response('home.html', {
-        'form': form
+        'form': form,
+        'is_home': True,
     }, context_instance=RequestContext(request))
 
 
@@ -82,6 +83,7 @@ def search_trip(request, trip_type):
         },
         'trip_type': trip_type,
         'OFFER': TRIP_OFFER,
+        'is_trip': True,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
@@ -102,6 +104,7 @@ def show_trip_results(request, trip_id=None, lib=None):
         'trip': trip,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
+        'is_trip': True,
     }, context_instance=RequestContext(request))
 
 @inject_lib(LibTrips)
@@ -148,6 +151,7 @@ def list_trips(request, page=1, lib=None):
         'count': count, 
         'page': int(page),
         'listpages': range(1, count // items_per_page +2),
+        'is_trip': True,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
@@ -165,6 +169,7 @@ def list_mine(request, page=1, lib=None):
         'count': count,
         'page': int(page),
         'listpages': compute_nb_pages(count, items_per_page),
+        'is_trip': True,
     }, context_instance=RequestContext(request))
 
 @inject_lib(LibTrips)
@@ -177,6 +182,7 @@ def show_trip(request, trip_id=None, lib=None):
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
         'authenticated': is_bvoauth_authenticated(request),
+        'is_trip': True,
     }, context_instance=RequestContext(request))
 
 
@@ -288,6 +294,7 @@ def create_trip(request, trip_id=None, trip_from_search=False, lib=None):
         'form_demand_options': form_demand,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
+        'is_trip': True,
     }
     if trip_id:
         view_dict['trip'] = trip

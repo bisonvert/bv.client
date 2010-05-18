@@ -34,6 +34,7 @@ def list_ratings(request, method, template, template_variable_name="ratings",
 
     """
     extra_context[template_variable_name] = getattr(lib, method)()
+    extra_context['is_rating'] = True
     return render_template(template,extra_context, request)
 
 @inject_lib(LibRatings)
@@ -52,4 +53,5 @@ def rate_user(request, temprating_id=None, lib=None):
     return render_template('ratings/rate_user.html', {
         'form':form,
         'tempreport': temprating,
+        'is_rating': true,
     }, request) 

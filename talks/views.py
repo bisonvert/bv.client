@@ -27,6 +27,7 @@ def list_talks(request, page=1, lib=None):
         'count': count, 
         'page': int(page),
         'listpages': compute_nb_pages(count, items_per_page),
+        'is_talk': True,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
@@ -65,6 +66,7 @@ def contact_user(request, trip_id=None, lib=None):
         'to_user' : trip.user,
         'form' : form,
         'trip': trip,
+        'is_talk': True,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
@@ -95,6 +97,7 @@ def list_messages(request, page=1, talk_id=None, lib=None):
         'talk' : talk,
         'form' : form,
         'messages': messages,
+        'is_talk': True,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
@@ -118,6 +121,7 @@ def cancel_talk(request, talk_id=None, lib=None):
     return render_to_response('cancel_talk.html', {
         'talk' : talk,
         'form' : form,
+        'is_talk': True,
     }, context_instance=RequestContext(request))
 
 @need_bvoauth_authentication()
