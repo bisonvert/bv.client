@@ -113,12 +113,12 @@ def display_matching_trips(request, trip_id=None, lib=None):
     def to_json(trip):
         return [get_trip_dict(t) for t in trips]
 
-    trip_search_type = request.POST['trip_type']
+    trip_search_type = int(request.POST['trip_type'])
     results = lib.search_trip(trip_id=trip_id, **unicode_to_dict(request.POST))
     trip_demands = results['trip_demands']
     trip_offers = results['trip_offers']
     trip = results['trip']
-
+    
     if trip_search_type == TRIP_OFFER:
         trips = trip_demands
     else:
@@ -172,7 +172,6 @@ def show_trip(request, trip_id=None, lib=None):
     """display informations about a trip
 
     """
-
     return render_to_response('show_trip.html', {
         'trip': lib.get_trip(trip_id),
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 

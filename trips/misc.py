@@ -15,7 +15,7 @@ def get_trip_dict(trip):
         'date': trip.date.strftime("%d/%m/%Y") if trip.date else None,
         'time': trip.time.strftime("%Hh") if trip.time else None,
 #        'dows': trip.print_dows(),
-        'seats_available': trip.offer.driver_seats_available if trip.offer else None,
+        'seats_available': trip.offer.driver_seats_available if hasattr(trip,'offer') else None,
         'user_name': trip.user.username,
         'user_id': trip.user.id,
         'absolute_url': reverse('trips:show', args=[trip.id])
