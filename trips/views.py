@@ -93,6 +93,21 @@ def show_trip_results(request, trip_id=None, lib=None):
     to have information about matching trips.
 
     """
+    if request.POST:
+        dict = {}
+        trip_details = simplejson.loads(request.POST['trip_details'])
+        if 'interval_min_radius' in trip_details:
+            dict['interval_min_radius'] = trip_details['interval_min_radius']
+        if 'interval_max_radius' in trip_details:
+            dict['interval_max_radius'] = trip_details['interval_min_radius']
+        if 'offer_radius' in trip_details:
+            dict['offer_radius'] = trip_details['interval_min_radius']
+        if 'demand_radius' in trip_details:
+            dict['demand_radius'] = trip_details['interval_min_radius']
+
+        lib.edit_trip(trip_id, **dict)
+
+
     userLib = LibUsers(**lib.get_params())
     user = userLib.get_active_user()
     trip = lib.get_trip(trip_id)
@@ -286,7 +301,6 @@ def create_trip(request, trip_id=None, trip_from_search=False, lib=None):
                 prefix="demand",
                 cartype_choices=cartypes
             )
-     
     view_dict = {
         'form':form,
         'trip_from_search': trip_from_search,

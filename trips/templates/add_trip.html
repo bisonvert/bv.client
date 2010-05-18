@@ -157,10 +157,10 @@ Ces critères optionnels ont pour but de nous aider à classer les annonces qui 
 
     var toolbarControl;
 
-    var trip_offer_radius = {% if form_offer_options.instance %}{{ form_offer_options.instance.radius }}{% else %}500{% endif %};
-    var trip_demand_radius = {% if form_demand_options.instance %}{{ form_demand_options.instance.radius }}{% else %}500{% endif %};
-    var interval_min_radius = 7{% if form.instance %} - {{ form.instance.interval_min }} {% endif %};
-    var interval_max_radius = {% if form.instance %}{{ form.instance.interval_max }}{% else %}0{% endif %};
+    var trip_offer_radius = {% if trip.offer %}{{ trip.offer.radius }}{% else %}500{% endif %};
+    var trip_demand_radius = {% if trip.demand %}{{ trip.demand.radius }}{% else %}500{% endif %};
+    var interval_min_radius = 7{% if trip %} - {{ trip.interval_min }} {% endif %};
+    var interval_max_radius = {% if trip %}{{ trip.interval_max }}{% else %}0{% endif %};
 {% endblock %}
 
 {% block ol_additional_functions %}
