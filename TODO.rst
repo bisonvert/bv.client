@@ -5,5 +5,4 @@ bvclient
 * Check radius save on update
 * Add login/logout views
 * Create return trip when needed
-* Add absolute url on show_results view
 

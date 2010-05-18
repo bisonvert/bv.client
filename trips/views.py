@@ -114,12 +114,12 @@ def show_trip_results(request, trip_id=None, lib=None):
 
     if user.id != trip.user.id:
         raise Http404()
-    
     return render_to_response('show_trip_results.html', {
         'trip': trip,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
         'is_trip': True,
+        'page_url': request.build_absolute_uri(),
     }, context_instance=RequestContext(request))
 
 @inject_lib(LibTrips)
