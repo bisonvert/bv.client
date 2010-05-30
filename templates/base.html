@@ -36,6 +36,7 @@
                 <li><a{% if is_trip %} class="current"{% endif %} href="{% url trips:list_mine %}">{% trans "My trips"%}</a></li>
                 <li><a{% if is_talk %} class="current"{% endif %} href="{% url talks:list %}">{% trans "My talks" %}</a></li>
                 <li><a{% if is_rating %} class="current"{% endif %} href="{% url ratings:list %}">{% trans "My reports" %}</a></li>
+                <li><a href="{{ server_urls.accounts.get }}">{% trans "My account" %}</a></li>
                 {% comment %}<li><a href="{% url bvserver:show_user_account %}">{% trans "My account" %}</a></li>{% endcomment %}
                 {% else %}
                 <li><a href="{% url oauth:login %}">{% trans "My account" %}</a></li>

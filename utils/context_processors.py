@@ -42,3 +42,16 @@ def js_ext(request):
     return {
         'JS_EXT': settings.JS_EXT
     }
+
+def server_urls(request):
+    """Provides a dict to the templates, with the urls of the server actions."""
+   
+    dict = {} 
+    for category, urls in settings.DEFAULT_SERVER_URLS.items():
+        if category != 'root':
+            dict[category] = {}
+            for name, url in urls.items():
+                if url.count("%s") == 1:
+                    dict[category][name] = url % settings.DEFAULT_SERVER_ROOT_URL
+    
+    return {'server_urls' : dict}

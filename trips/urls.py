@@ -5,7 +5,7 @@ from django.conf.urls.defaults import *
 from forms import TRIP_OFFER, TRIP_DEMAND
 
 urlpatterns = patterns('trips.views',
-    (r'^/$', 'home', {}, 'home'),
+    (r'^$', 'home', {}, 'home'),
     
     (r'^mine/(?P<page>\d+)/$', 'list_mine', {}, 'list_mine'),
     (r'^mine/$', 'list_mine', {}, 'list_mine'),    

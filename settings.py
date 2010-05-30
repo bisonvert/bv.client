@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = SERVE_STATIC_FILES = DEBUG
 
 PROJECT_NAME = "Bison Vert Client"
@@ -52,9 +52,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'utils.context_processors.js_ext',
     'bvlibclient.ext.dj.bvauth',
-#    'utils.context_processors.project_info',
-#    'utils.context_processors.get_google_analytics_info',
-#    'utils.context_processors.get_google_adsense_info',
+    'utils.context_processors.server_urls',
 )
 
 ROOT_URLCONF = 'bvclient.urls'
@@ -80,8 +78,12 @@ INSTALLED_APPS = (
 PERSISTENT_SESSION_KEY = 'testtesttest'
 SESSION_COOKIE_NAME = 'bvclient'
 
-# OAUTH settings.
+# bvclient django extension related settings
 BVCLIENT_OAUTH_APPID = 'bisonvert' # must match to oauthclient token identifier
+
+# oauthclient django application related settings
+OAUTHCLIENT_REDIRECT_AFTER_LOGIN = OAUTHCLIENT_REDIRECT_AFTER_LOGOUT = 'trips:home'
+OAUTHCLIENT_ERROR_TEMPLATE  = 'oauthclient/error.html'
 
 # Map settings
 DEFAULT_MAP_CENTER_NAME = "France" 
@@ -90,6 +92,13 @@ DEFAULT_MAP_CENTER_ZOOM = 5
 
 # pagination params
 DEFAULT_ITEMS_PER_PAGE = 10
+
+DEFAULT_SERVER_ROOT_URL = "http://api.bisonvert.net" 
+DEFAULT_SERVER_URLS = {
+    'accounts': {
+        'get': '%s/account/'
+    }, 
+}
 
 try:
     from local_settings import *
