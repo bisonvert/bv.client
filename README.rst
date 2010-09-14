@@ -13,7 +13,7 @@ carpool demands with carpool offers.
 The infrastructure is in 4 parts, which can all be found in the bitbucket page
 http://bitbucket.org/bisonvert/.
 
-The server 
+The server
 ~~~~~~~~~~
 
 The main application logic of the carpooling service is contained in the server.
@@ -31,7 +31,7 @@ for Geographic informations and requests, and Mapnik to return the layers.
 The server *does not* provides a web interface to create and search trips: this
 is the role of the client.
 
-The library 
+The library
 ~~~~~~~~~~~
 
 A library to consume the API is provided. It's wrote in python, and not tied at
@@ -75,7 +75,7 @@ To be sure to have the last dev version, follow these steps::
 
     $ hg clone http://bitbucket.org/bisonvert/bvclient/
     $ hg clone http://bitbucket.org/bisonvert/bvlibclient/
-    $ hg clone http://bitbucket.org/bisonvert/django-oauthclient/ 
+    $ hg clone http://bitbucket.org/bisonvert/django-oauthclient/
 
 Once the source fetched, you need to configure your client.
 

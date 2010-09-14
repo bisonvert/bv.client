@@ -10,9 +10,9 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bvlibclient import LibTrips, LibUsers, ResourceAccessForbidden, \
+from bv.libclient import LibTrips, LibUsers, ResourceAccessForbidden, \
     ResourceDoesNotExist, unicode_to_dict
-from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication, \
+from bv.libclient.ext.dj import inject_lib, need_bvoauth_authentication, \
     is_bvoauth_authenticated
 from trips.misc import get_trip_dict
 from utils.paginator import compute_nb_pages

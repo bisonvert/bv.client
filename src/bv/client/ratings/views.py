@@ -6,8 +6,8 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bvlibclient import LibRatings, LibUsers
-from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
+from bv.libclient import LibRatings, LibUsers
+from bv.libclient.ext.dj import inject_lib, need_bvoauth_authentication
 
 # ratings imports
 from ratings.forms import ReportForm

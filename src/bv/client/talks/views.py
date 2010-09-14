@@ -6,8 +6,8 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bvlibclient import LibTalks, LibUsers, LibTrips
-from bvlibclient.ext.dj import inject_lib, need_bvoauth_authentication
+from bv.libclient import LibTalks, LibUsers, LibTrips
+from bv.libclient.ext.dj import inject_lib, need_bvoauth_authentication
 
 from talks.forms import ContactUserForm
 from utils.paginator import compute_nb_pages

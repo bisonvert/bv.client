@@ -41,7 +41,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'bvlibclient.ext.dj.AuthenticationMiddleware',
+    'bv.libclient.ext.dj.AuthenticationMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
@@ -51,7 +51,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'utils.context_processors.js_ext',
-    'bvlibclient.ext.dj.bvauth',
+    'bv.libclient.ext.dj.bvauth',
     'utils.context_processors.server_urls',
 )
 
