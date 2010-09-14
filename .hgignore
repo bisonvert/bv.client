@@ -5,3 +5,11 @@ django
 oauthclient
 libclient
 local_settings.py
+.installed.cfg
+.mr.developer.cfg
+bin/.*
+develop-eggs/.*
+etc/paster.ini
+parts/.*
+src/bv.client.egg-info.*
+
