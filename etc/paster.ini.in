@@ -1,31 +1,19 @@
 #/ cchb WSGI CONFIGURATION FILE FOR DEVELOPMENT
 [DEFAULT]
-debug=true
+debug=${settings:debug}
 
 [composite:main]
 use=egg:Paste#urlmap
-/carto/media/=pmedia
-/carto/doc/admin/=padmindoc
-/carto/admin/media/=padminmedia
-/carto/opencarto-media/=pocmedia
-/carto/olwidget-media/=polwmedia
-/carto/=pmain
-/carto/threads/=watch_threads
+/media/=pmedia
+/admin/media/=padminmedia
+/=pmain
+/threads/=watch_threads
 
 [pipeline:pmain]
 pipeline= translogger cchbapp
 
 [pipeline:pmedia]
 pipeline= translogger exc mediaapp
-
-[pipeline:padmindoc]
-pipeline= translogger exc admindocapp
-
-[pipeline:pocmedia]
-pipeline= translogger exc ocmediapp
-
-[pipeline:polwmedia]
-pipeline= translogger exc olwmediapp
 
 [pipeline:padminmedia]
 pipeline= translogger exc adminmediaapp
@@ -48,27 +36,12 @@ paste.filter_factory = cchb.cchbmiddleware:closeconnection_factory
 
 [app:cchbapp]
 use=egg:dj.paste
-django_settings_module=${buildout:dsm}
+django_settings_module=bv.client.${buildout:dsm}
 
 [app:mediaapp]
 use = egg:Paste#pkg_resources
-egg = cchb
-resource_name=media
-
-[app:admindocapp]
-use = egg:Paste#pkg_resources
-egg = cchb
-resource_name=docs/admin/build/html
-
-[app:ocmediapp]
-use = egg:Paste#pkg_resources
-egg = opencarto
-resource_name=opencarto/publication/media/
-
-[app:olwmediapp]
-use = egg:Paste#pkg_resources
-egg = django-olwidget
-resource_name=olwidget/django-olwidget/olwidget/media/olwidget/
+egg = bv.client
+resource_name=media/
 
 [app:adminmediaapp]
 use = egg:Paste#pkg_resources
@@ -80,6 +53,7 @@ keys = root,wsgi,routes
 
 [handlers]
 keys = fconsole,console,accesslog,errorlog
+
 [formatters]
 keys = generic,accesslog
 
@@ -143,6 +117,6 @@ format = %(message)s
 
 [server:main]
 use=egg:Paste#http
-host=127.0.0.1
-port=8085
+host=${settings:host}
+port=${settings:port}
 
