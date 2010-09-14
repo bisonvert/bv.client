@@ -1,4 +1,4 @@
-#/ cchb WSGI CONFIGURATION FILE FOR DEVELOPMENT
+# bv.clientb WSGI CONFIGURATION FILE
 [DEFAULT]
 debug=${settings:debug}
 
