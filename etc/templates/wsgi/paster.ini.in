@@ -56,7 +56,7 @@ django_settings_module=bv.client.${buildout:dsm}
 [app:mediaapp]
 use = egg:Paste#pkg_resources
 egg = bv.client
-resource_name=media/
+resource_name=bv/client/staticfiles/
 
 [app:adminmediaapp]
 use = egg:Paste#pkg_resources
