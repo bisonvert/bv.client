@@ -20,7 +20,7 @@ USE_I18N = True
 import os.path
 PROJECT_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 MEDIA_ROOT = os.path.join(PROJECT_ROOT_PATH, 'staticfiles')
-MEDIA_URL = '/site_media/'
+MEDIA_URL = '/media/'
  
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT_PATH, 'templates'),
@@ -50,12 +50,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-    'utils.context_processors.js_ext',
+    'bv.client.utils.context_processors.js_ext',
     'bv.libclient.ext.dj.bvauth',
-    'utils.context_processors.server_urls',
+    'bv.client.utils.context_processors.server_urls',
 )
 
-ROOT_URLCONF = 'bvclient.urls'
+ROOT_URLCONF = 'bv.client.urls'
 
 JS_EXT = '-min.js' if not DEBUG else '.js'
 
@@ -68,11 +68,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 
     # internal
-    'trips',
-    'talks', 
-    'ratings', 
+    'bv.client.trips',
+    'bv.client.talks', 
+    'bv.client.ratings', 
+    'bv.client.utils',
     'oauthclient',
-    'utils',
 )
 
 PERSISTENT_SESSION_KEY = 'testtesttest'
@@ -93,7 +93,8 @@ DEFAULT_MAP_CENTER_ZOOM = 5
 # pagination params
 DEFAULT_ITEMS_PER_PAGE = 10
 
-DEFAULT_SERVER_ROOT_URL = "http://api.bisonvert.net" 
+# DEFAULT_SERVER_ROOT_URL = "http://api.bisonvert.net" 
+DEFAULT_SERVER_ROOT_URL = "http://127.0.0.1:8085"
 DEFAULT_SERVER_URLS = {
     'accounts': {
         'get': '%s/account/'

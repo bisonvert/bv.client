@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: set fileencoding=utf-8 :
 
-# XXX TAKEN FROM bv.server.talks.form
-
 """Forms for talk module"""
 
 from django.utils.translation import ugettext_lazy as _
+
 from django import forms
 
 class ContactUserForm(forms.Form):
@@ -19,4 +18,3 @@ class ContactUserForm(forms.Form):
         label=_("* Message:"),
         widget=forms.widgets.Textarea({'rows': '12', 'cols': '60'})
     )
-

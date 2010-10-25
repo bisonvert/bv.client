@@ -11,8 +11,8 @@ from django.contrib.gis.geos.error import GEOSException
 from django.contrib.gis.geos import GEOSGeometry
 
 #utils import
-from utils.fields import FrenchDateField, FrenchDecimalField, SelectableTimeField
-from utils.widgets import FrenchDateInput, AutoCompleteTextInput, SelectableTimeWidget, NullBooleanSelect,CheckboxSelectMultipleAsArray
+from bv.client.utils.fields import FrenchDateField, FrenchDecimalField, SelectableTimeField
+from bv.client.utils.widgets import FrenchDateInput, AutoCompleteTextInput, SelectableTimeWidget, NullBooleanSelect,CheckboxSelectMultipleAsArray
 
 #constants
 TRIP_OFFER = 0

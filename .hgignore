@@ -13,3 +13,10 @@ etc/paster.ini
 parts/.*
 src/bv.client.egg-info.*
 
+
+log/.*log
+sys/.*
+eggs/.*
+minilays/*
+
+

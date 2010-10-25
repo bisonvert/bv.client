@@ -6,12 +6,12 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bv.libclient import LibRatings, LibUsers
+from bv.libclient.libratings import LibRatings
 from bv.libclient.ext.dj import inject_lib, need_bvoauth_authentication
 
 # ratings imports
-from ratings.forms import ReportForm
-from utils.paginator import compute_nb_pages
+from bv.client.ratings.forms import ReportForm
+from bv.client.utils.paginator import compute_nb_pages
 
 DEFAULT_ITEMS_PER_PAGE = settings.DEFAULT_ITEMS_PER_PAGE
 items_per_page = getattr(settings, 'RATINGS_PER_PAGE', DEFAULT_ITEMS_PER_PAGE)

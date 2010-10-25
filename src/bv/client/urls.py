@@ -4,11 +4,11 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('bv.client',
     (r'^$', 'trips.views.home', {}, 'home'),
-    (r'^trips/', include('trips.urls', namespace='trips')),
-    (r'^talks/', include('talks.urls', namespace='talks')),
-    (r'^ratings/', include('ratings.urls', namespace='ratings')),
+    (r'^trips/', include('bv.client.trips.urls', namespace='trips')),
+    (r'^talks/', include('bv.client.talks.urls', namespace='talks')),
+    (r'^ratings/', include('bv.client.ratings.urls', namespace='ratings')),
     (r'^oauth/', include('oauthclient.urls', namespace='oauth', app_name='bvoauth'),
             {'identifier': getattr(settings, 'BVCLIENT_OAUTH_APPID', 'bisonvert')}),
 

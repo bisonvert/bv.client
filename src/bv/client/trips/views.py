@@ -10,12 +10,14 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bv.libclient import LibTrips, LibUsers, ResourceAccessForbidden, \
-    ResourceDoesNotExist, unicode_to_dict
+from bv.libclient.libtrips import LibTrips
+from bv.libclient.libusers import LibUsers
+from bv.libclient.utils import unicode_to_dict
 from bv.libclient.ext.dj import inject_lib, need_bvoauth_authentication, \
-    is_bvoauth_authenticated
-from trips.misc import get_trip_dict
-from utils.paginator import compute_nb_pages
+        is_bvoauth_authenticated
+from bv.libclient.exceptions import ResourceAccessForbidden, ResourceDoesNotExist
+from bv.client.trips.misc import get_trip_dict
+from bv.client.utils.paginator import compute_nb_pages
 
 # forms
 from forms import EditTripForm, SearchTripForm, TRIP_OFFER, TRIP_DEMAND, \
@@ -110,6 +112,7 @@ def show_trip_results(request, trip_id=None, lib=None):
 
     userLib = LibUsers(**lib.get_params())
     user = userLib.get_active_user()
+    # import pdb; pdb.set_trace()
     trip = lib.get_trip(trip_id)
 
     if user.id != trip.user.id:

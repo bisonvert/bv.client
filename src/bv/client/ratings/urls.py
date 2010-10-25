@@ -17,7 +17,7 @@ given_params = {
     'extra_context': {'is_given': True}
 }
 
-urlpatterns = patterns('ratings.views',
+urlpatterns = patterns('bv.client.ratings.views',
     url(r'^$', 'list_ratings', pending_params, 'list'),
     url(r'^pending/$', 'list_ratings', pending_params, 'pending'),
     url(r'^pending/(?P<page>\d+)/$', 'list_ratings', pending_params, 'pending'),

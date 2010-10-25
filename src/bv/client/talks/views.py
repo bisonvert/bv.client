@@ -6,11 +6,13 @@ from django.template import RequestContext
 from django.conf import settings
 
 # bvclient imports
-from bv.libclient import LibTalks, LibUsers, LibTrips
+from bv.libclient.libtalks import LibTalks
+from bv.libclient.libtrips import LibTrips
+from bv.libclient.libusers import LibUsers
 from bv.libclient.ext.dj import inject_lib, need_bvoauth_authentication
 
-from talks.forms import ContactUserForm
-from utils.paginator import compute_nb_pages
+from bv.client.talks.forms import ContactUserForm
+from bv.client.utils.paginator import compute_nb_pages
 
 DEFAULT_ITEMS_PER_PAGE = settings.DEFAULT_ITEMS_PER_PAGE
 items_per_page = getattr(settings, 'TALKS_PER_PAGE', DEFAULT_ITEMS_PER_PAGE)

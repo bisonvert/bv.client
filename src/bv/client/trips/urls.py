@@ -2,9 +2,9 @@
 from django.conf.urls.defaults import *
 
 #bvclient imports
-from forms import TRIP_OFFER, TRIP_DEMAND
+from bv.client.trips.forms import TRIP_OFFER, TRIP_DEMAND
 
-urlpatterns = patterns('trips.views',
+urlpatterns = patterns('bv.client.trips.views',
     (r'^$', 'home', {}, 'home'),
     
     (r'^mine/(?P<page>\d+)/$', 'list_mine', {}, 'list_mine'),

@@ -1,7 +1,7 @@
 #django imports
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('talks.views',
+urlpatterns = patterns('bv.client.talks.views',
     url(r'^$', 'list_talks', {}, 'list'),
     url(r'^(?P<page>\d+)/$', 'list_talks', {}, 'list'),
     url(r'^with/user/(?P<trip_id>\d+)/$', 'contact_user', {}, 'contact_user'),

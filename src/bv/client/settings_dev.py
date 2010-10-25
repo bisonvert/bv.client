@@ -1,0 +1,1 @@
+/home/djcoin/minitage/django/bv.client/etc/django-settings/settings-BOX-dev.py
