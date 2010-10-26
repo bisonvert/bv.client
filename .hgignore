@@ -20,3 +20,12 @@ eggs/.*
 minilays/*
 
 
+etc/apache/100-bv.client.reverseproxy.conf
+etc/hudson/bv.client/build/activate_env.sh
+etc/hudson/bv.client/config.xml
+etc/init.d/supervisor.initd
+etc/wsgi/instance.ini
+
+
+.minitage/markers/install
+.minitage/minibuild
