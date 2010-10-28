@@ -1,0 +1,49 @@
+[
+ {
+  "pk": 1, 
+  "model": "oauthclient.oauthserver", 
+  "fields": {
+   "server_url": "http://127.0.0.1:8085", 
+   "request_token_url": "/oauth/request_token/", 
+   "access_token_url": "/oauth/access_token/", 
+   "authorize_url": "/oauth/authorize/"
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "oauthclient.consumertoken", 
+  "fields": {
+   "server": 1
+   "identifier": "bisonvert", 
+   "key": "my_oauth_key", 
+   "secret": "my_oauth_s3cr3t", 
+   "last_modification": "2010-10-18", 
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "sites.site", 
+  "fields": {
+   "domain": "127.0.0.1:8095", 
+   "name": "My BisonVert client site"
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "auth.user", 
+  "fields": {
+   "username": "bvclientadmin", 
+   "first_name": "", 
+   "last_name": "", 
+   "is_active": true, 
+   "is_superuser": true, 
+   "is_staff": true, 
+   "last_login": "2010-10-28 11:51:09", 
+   "groups": [], 
+   "user_permissions": [], 
+   "password": "sha1$33db8$ab637eb73a3ca2584ad3bf586b40c0893328239c", 
+   "email": "admin@bvclient.net", 
+   "date_joined": "2010-10-28 11:51:09"
+  }
+ }
+]
