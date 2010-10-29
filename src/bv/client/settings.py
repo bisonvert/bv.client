@@ -19,13 +19,14 @@ USE_I18N = True
 
 import os.path
 PROJECT_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+# MINITAGE_ROOT_PATH = os.path.join(PROJECT_ROOT_PATH, *('../../../..'.split('/')))
+
 MEDIA_ROOT = os.path.join(PROJECT_ROOT_PATH, 'staticfiles')
 MEDIA_URL = '/media/'
  
 
 # XXX temporary fix
-MINITAGE_ROOT_PATH = os.path.join(PROJECT_ROOT_PATH, '..', '..', '..', '..')
-GEOS_LIBRARY_PATH = os.path.join(MINITAGE_ROOT_PATH, *('dependencies/geos-3.2/parts/part/lib/libgeos_c.so'.split('/')))
+# GEOS_LIBRARY_PATH = os.path.join(MINITAGE_ROOT_PATH, *('dependencies/geos-3.2/parts/part/lib/libgeos_c.so'.split('/')))
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT_PATH, 'templates'),
