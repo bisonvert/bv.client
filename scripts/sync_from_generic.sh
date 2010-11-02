@@ -70,4 +70,10 @@ a\     *repoze.org*
 a\     *crummy.com*
 a\     *minitage.org*
 }" -i etc/sys/settings.cfg
+
+
+# change the media default
+sed -re "/\[app:mediaapp\]/,/^\s*$/s#(resource_name=).*.#\1bv/client/staticfiles/#" -i etc/templates/wsgi/paster.ini.in
+
+
 # vim:set et sts=4 ts=4 tw=0:

@@ -28,13 +28,18 @@
 </tr>
 <tr>
 	<td>type</td>
+	<td>scm_type</td>
+	<td>git</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>project</td>
 	<td>bv.client</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>uri</td>
-	<td>http://bitbucket.org/kiorky/bv.client</td>
+	<td>http://github.com/djcoin/bv.client.git</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -73,11 +78,6 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>db_port</td>
-	<td>5434</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>http_port</td>
 	<td>8085</td>
 </tr>
@@ -89,6 +89,16 @@
 <tr>
 	<td>click</td>
 	<td>with_database_sqlite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>db_type</td>
+	<td>sqlite</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>db_port</td>
 	<td></td>
 </tr>
 <tr>
@@ -119,11 +129,6 @@
 <tr>
 	<td>click</td>
 	<td>with_autocheckout_django-oauthclient</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit_cgwbDownload</td>
 	<td></td>
 </tr>
 
