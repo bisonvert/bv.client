@@ -34,7 +34,7 @@ TEMPLATE_DIRS = (
 
 STATIC_DOC_ROOT = os.path.join(PROJECT_ROOT_PATH, 'staticfiles')
 
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/admin/media/'
 
 SECRET_KEY = 'nppo6u@=%eeb-=7owurguf=d4)38zbqmdkjdmmvr4kwb5!6!msm'
 
@@ -85,7 +85,7 @@ PERSISTENT_SESSION_KEY = 'testtesttest'
 SESSION_COOKIE_NAME = 'bvclient'
 
 # bvclient django extension related settings
-BVCLIENT_OAUTH_APPID = 'bisonvert' # must match to oauthclient token identifier
+BVCLIENT_OAUTH_APPID = 'bisonvertapp' # must match to oauthclient token identifier
 
 # oauthclient django application related settings
 OAUTHCLIENT_REDIRECT_AFTER_LOGIN = OAUTHCLIENT_REDIRECT_AFTER_LOGOUT = 'trips:home'

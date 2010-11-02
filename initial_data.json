@@ -13,11 +13,11 @@
   "pk": 1, 
   "model": "oauthclient.consumertoken", 
   "fields": {
-   "server": 1
-   "identifier": "bisonvert", 
-   "key": "my_oauth_key", 
-   "secret": "my_oauth_s3cr3t", 
-   "last_modification": "2010-10-18", 
+   "server": 1,
+   "identifier": "bisonvertapp", 
+   "key": "kkk", 
+   "secret": "sss", 
+   "last_modification": "2010-10-18"
   }
  }, 
  {
