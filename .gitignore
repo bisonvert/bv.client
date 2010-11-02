@@ -1,0 +1,10 @@
+bin/
+parts/
+eggs/
+develop-eggs/
+*.pyc
+src/bv.client.egg-info/
+src.mrdeveloper/
+setuptools_hg-0.2-py2.6.egg/
+sys/
+var/
