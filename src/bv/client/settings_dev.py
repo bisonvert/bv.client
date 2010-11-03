@@ -8,13 +8,6 @@ file at the root of the project.
 # you can search for parameters to override inside this module.
 from bv.client.settings import *
 
-# DATABASE_ENGINE = 'postgresql_psycopg2'
-# DATABASE_NAME = 'bv'
-# DATABASE_USER = 'bv'
-# DATABASE_PASSWORD = 'secret'
-# DATABASE_HOST = 'localhost'
-# DATABASE_PORT = '5434'
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -40,9 +33,6 @@ GOOGLE_ADSENSE_WIDTH = ''
 GOOGLE_ADSENSE_HEIGHT = ''
 GOOGLE_ADSENSE_ENABLE = False
 
-# Mapnik
-MAPNIK_CONFIGFILE = os.path.join(PROJECT_ROOT_PATH, '../ogcserver/ogcserver.conf')
-
 # Parameter to set to True in production: exclude my own trips in result of search - DEFAULT
 EXCLUDE_MY_TRIPS = False
 
@@ -54,6 +44,7 @@ JS_EXT = '-min.js' if not DEBUG else '.js'
 #CACHE_KEY = 'bv'
 
 ADMINS = ()
+MANAGERS = ADMINS
 
 # for admin messages - DEFAULT
 EMAIL_SUBJECT_PREFIX = '[Django] '
@@ -62,15 +53,6 @@ SERVER_EMAIL = 'admin@foo.bar'
 # Emails - DEFAULT
 FROM_EMAIL = 'admin@foo.bar'
 CONTACT_EMAIL = 'admin@foo.bar'
-
-MANAGERS = ADMINS
-
-# TESTING 
-TEST_RUNNER = 'django.contrib.gis.tests.run_tests'
-POSTGIS_TEMPLATE = 'template_postgis'
-POSTGIS_SQL_PATH = '/usr/local/share'
-TEST_SQL_PATH = os.path.join(PROJECT_ROOT_PATH, '../share/data')
-TEST_SQL_FILES = ('procedures.sql', 'trigger.sql', 'additional_columns.sql')
 
 # DEFAULT
 EMAIL_HOST = 'localhost'
