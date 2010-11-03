@@ -1,12 +1,12 @@
-* A project has been created in /tmp/tmp3QCCFI.
+* A project has been created in /tmp/tmpvqhQp7.
 
-* A minilay has been installed in /tmp/tmp3QCCFI/minilays/bv.client.
+* A minilay has been installed in /tmp/tmpvqhQp7/minilays/bv.client.
 * It contains those minilbuilds:
-	- bv.client-prod
-	- bv.client 
+	- bv.client
+	- bv.client-prod 
 
 * Think to finish the versionning stuff and put this minilay and the projet under revision control.
-* The project must be archived here 'http://bitbucket.org/kiorky/bv.client' using 'hg' or change the minibuild src_uri/scm_type.
+* The project must be archived here 'http://github.com/djcoin/bv.client.git' using 'git' or change the minibuild src_uri/scm_type.
 * Install your project running: 
 		minimerge -v bv.client
 * You can additionnaly create related databases or configuration or other stuff using minitage instances  (http://minitage.org/paster/instances/index.html)
