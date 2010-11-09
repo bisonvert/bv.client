@@ -134,8 +134,8 @@ function retrieveTrips() {
                 geometry: (getTripType() != TYPE_DEMAND) ? wkt.write(new OpenLayers.Feature.Vector(trip_pls.geometry)) : "",
                 departure_point: wkt.write(trip[0].marker),
                 arrival_point: wkt.write(trip[trip.length-1].marker),
-                interval_min_radius: 7-interval_min_radius,
-                interval_max_radius: interval_max_radius,
+                interval_min: 7-interval_min_radius,
+                interval_max: interval_max_radius,
                 offer_radius: (getTripType() != TYPE_DEMAND) ? trip_offer_radius : 0,
                 demand_radius: (getTripType() != TYPE_OFFER) ? trip_demand_radius : 0,
 				trip_type: trip_type
@@ -370,9 +370,7 @@ if ($('form_save_trip')) {
         var arrival;
         var steps = new Array();
         for (var index = 0, len = trip.length; index < len; ++index) {
-            var step = $H({
-                'point': wkt.write(trip[index].marker)
-            });
+            var step = wkt.write(trip[index].marker);
             if (index == 0) {
                 departure = step;
             } else if (index == len-1) {
@@ -382,17 +380,17 @@ if ($('form_save_trip')) {
             }
         }
         var trip_details = $H({
-            'departure': departure,
-            'arrival': arrival,
-            'interval_min_radius': 7-interval_min_radius,
-            'interval_max_radius': interval_max_radius
+            'departure_point': departure,
+            'arrival_point': arrival,
+            'interval_min': 7-interval_min_radius,
+            'interval_max': interval_max_radius
         });
         if (getTripType() != TYPE_OFFER) {
             trip_details.set('demand_radius', trip_demand_radius);
         }
         if (getTripType() != TYPE_DEMAND) {
-            trip_details.set('route', wkt.write(trip_pls));
-            trip_details.set('steps', steps);
+            trip_details.set('offer_route', wkt.write(trip_pls));
+            trip_details.set('offer_steps', steps.toJSON());
             trip_details.set('offer_radius', trip_offer_radius);
         }
         $('trip_details').setValue(trip_details.toJSON());
