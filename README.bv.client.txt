@@ -1,6 +1,6 @@
-* A project has been created in /tmp/tmpvqhQp7.
+* A project has been created in /tmp/tmpPz7bPh.
 
-* A minilay has been installed in /tmp/tmpvqhQp7/minilays/bv.client.
+* A minilay has been installed in /tmp/tmpPz7bPh/minilays/bv.client.
 * It contains those minilbuilds:
 	- bv.client
 	- bv.client-prod 

@@ -131,7 +131,11 @@
 	<td>with_autocheckout_django-oauthclient</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>click</td>
+	<td>with_tool_nose</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
