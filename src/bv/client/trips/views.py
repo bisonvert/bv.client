@@ -105,7 +105,7 @@ def show_trip_results(request, trip_id=None, lib=None):
     if request.POST:
         dict = {}
         trip_details = simplejson.loads(request.POST['trip_details'])
-        trip = lib.reduced_edit_trip(trip_id, **trip_details)
+        trip = lib.edit_trip(trip_id, **trip_details)
 
     return render_to_response('show_trip_results.html', {
         'trip': trip,
