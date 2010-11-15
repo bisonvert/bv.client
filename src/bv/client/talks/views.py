@@ -24,7 +24,7 @@ def list_talks(request, page=1, lib=None):
 
     """
     count = lib.count_talks()
-    return render_to_response('list_talks.html', {
+    return render_to_response('talks/list_talks.html', {
         'talks': lib.list_talks(page, items_per_page), 
         'count': count, 
         'page': int(page),
@@ -63,7 +63,7 @@ def contact_user(request, trip_id=None, lib=None):
     libtrips = LibTrips(**lib.get_params())
     trip  = libtrips.get_trip(trip_id)
 
-    return render_to_response('contact_user.html', {
+    return render_to_response('talks/contact_user.html', {
         'from_user' : request.bvuser,
         'to_user' : trip.user,
         'form' : form,
@@ -94,7 +94,7 @@ def list_messages(request, page=1, talk_id=None, lib=None):
     else:
         to_user = talk.from_user
 
-    return render_to_response('list_messages.html', {
+    return render_to_response('talks/list_messages.html', {
         'to_user' : to_user,
         'talk' : talk,
         'form' : form,
@@ -120,7 +120,7 @@ def cancel_talk(request, talk_id=None, lib=None):
         form = ContactUserForm()
 
     talk = lib.get_talk(talk_id)
-    return render_to_response('cancel_talk.html', {
+    return render_to_response('talks/cancel_talk.html', {
         'talk' : talk,
         'form' : form,
         'is_talk': True,
@@ -133,4 +133,4 @@ def validate_talk(request, talk_id=None, lib=None):
 
     """
     lib.validate_talk(talk_id)
-    return redirect('talks:confirm_validate')
+    return redirect(reverse('talks:confirm_validate', args=[talk_id]))

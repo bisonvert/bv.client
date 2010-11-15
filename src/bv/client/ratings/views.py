@@ -53,5 +53,5 @@ def rate_user(request, temprating_id=None, lib=None):
     return render_template('ratings/rate_user.html', {
         'form':form,
         'tempreport': temprating,
-        'is_rating': true,
+        'is_rating': True,
     }, request) 
