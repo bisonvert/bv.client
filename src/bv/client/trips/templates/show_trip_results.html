@@ -8,7 +8,7 @@
                         <a href="{% url trips:list_mine %}">{% trans "My trips" %}</a> &raquo; 
                         <a href="{% url trips:edit trip.id %}">{{ trip.name }}</a> &raquo; 
                         <a href="{% url trips:show_results trip.id %}">{% trans "Trip results" %}</a>
-                        <a href="/feeds/rss/resultats_annonce/{{ trip.id }}/" title="{% trans "RSS feed for this trip" %}"><img src="{{ MEDIA_URL }}img/rss.gif" alt="{% trans "RSS feed" %}" /></a>
+                        <a href="{{server_urls.feed_rss.results}}/{{ trip.id }}/" title="{% trans "RSS feed for this trip" %}"><img src="{{ MEDIA_URL }}img/rss.gif" alt="{% trans "RSS feed" %}" /></a>
                     </p>
 
                     <div id="permalink">

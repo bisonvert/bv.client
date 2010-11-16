@@ -105,6 +105,14 @@ DEFAULT_SERVER_URLS = {
     'accounts': {
         'get': '%s/account/'
     }, 
+
+    'feed_rss': {
+        'from'   : '%s/feeds/rss/au_depart_de',
+        'to'     : '%s/feeds/rss/a_destination_de',
+        'results': '%s/feeds/rss/resultats_annonce',
+        'all'    : '%s/feeds/rss/annonces_covoiturage',
+    },
+
 }
 
 try:
