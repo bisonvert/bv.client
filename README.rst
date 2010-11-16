@@ -1,17 +1,18 @@
 BisonVert client
 ================
 
-This repository is the main repository of a client wrote in django, for
-bisonvert, a carpooling system.
+This repository is the main repository of a client wrote in Django, for
+BisonVert, a carpooling system.
+
+The infrastructure is in 4 parts, which can all be found at: https://github.com/bisonvert/.
+
+For further informations, **see the wiki at:** https://github.com/djcoin/bv.client/wiki/
 
 What is Bisonvert ?
 -------------------
 
-Bisonvert is a simple carpooling web application. The primary goal is to match
+BisonVert is a simple carpooling web application developped by `Makina Corpus <http://www.makina-corpus.com/>`_. The primary goal is to match
 carpool demands with carpool offers.
-
-The infrastructure is in 4 parts, which can all be found in the bitbucket page
-http://bitbucket.org/bisonvert/.
 
 The server
 ~~~~~~~~~~
@@ -52,37 +53,7 @@ Dependencies
 
 BisonVert client depends on few existing django apps and packages:
 
-* bvclientlib: http://bitbucket.org/bisonvert/bvlibclient
-* django-oauthclient: http://bitbucket.org/bisonvert/django-oauthclient
-* the excellent restkit lib, by Benoît Chesneau: http://github.com/benoitc/restkit/
-
-Installation
-------------
-
-You can both install bisonvert from the mercurial repositories, and from pip.
-
-Pip install
-~~~~~~~~~~~
-
-The best way is to install bisonvert from pip::
-
-    $ pip install bisonvert-client
-
-Install from sources
-~~~~~~~~~~~~~~~~~~~~
-
-To be sure to have the last dev version, follow these steps::
-
-    $ hg clone http://bitbucket.org/bisonvert/bvclient/
-    $ hg clone http://bitbucket.org/bisonvert/bvlibclient/
-    $ hg clone http://bitbucket.org/bisonvert/django-oauthclient/
-
-Once the source fetched, you need to configure your client.
-
-Launch bisonvert
-~~~~~~~~~~~~~~~~
-
-To launch the client, just go to the source lib, and do::
-
-    $ python manage.py runserver
+* bvclientlib: https://github.com/djcoin/bv.libclient
+* django-oauthclient: https://github.com/djcoin/django-oauthclient
+* the excellent restkit lib, by Benoît Chesneau: https://github.com/benoitc/restkit/
 
