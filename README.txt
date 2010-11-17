@@ -32,7 +32,7 @@ INSTALLING THIS PROJECT VITH MINITAGE
     virtualenv --no-site-packages --distribute $MT
     source /minitage/bin/activate
     easy_install -U minitage.core minitage.paste
-    svn co http://github.com/djcoin/bv.client.git/minilays/bv.client $MT/minilays/bv.client
+    svn co https://github.com/bisonvert/bv.client.git/minilays/bv.client $MT/minilays/bv.client
     minimerge -v bv.client
     #minimerge -v bv.client-prod
     $MT/bin/paster create -t minitage.instances.env bv.client #(-prod)
