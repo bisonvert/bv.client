@@ -6,7 +6,7 @@ BisonVert, a carpooling system.
 
 The infrastructure is in 4 parts, which can all be found at: https://github.com/bisonvert/.
 
-For further informations, **see the wiki at:** https://github.com/djcoin/bv.client/wiki/
+For further informations, **see the wiki at:** https://github.com/bisonvert/bv.client/wiki/
 
 What is Bisonvert ?
 -------------------
@@ -53,7 +53,7 @@ Dependencies
 
 BisonVert client depends on few existing django apps and packages:
 
-* bvclientlib: https://github.com/djcoin/bv.libclient
-* django-oauthclient: https://github.com/djcoin/django-oauthclient
+* bvclientlib: https://github.com/bisonvert/bv.libclient
+* django-oauthclient: https://github.com/bisonvert/django-oauthclient
 * the excellent restkit lib, by Benoît Chesneau: https://github.com/benoitc/restkit/
 
