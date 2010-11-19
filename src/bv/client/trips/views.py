@@ -49,6 +49,7 @@ def home(request, lib):
         form = SearchTripForm()
         
     return render_to_response('home.html', {
+        'gmapkey': settings.GOOGLE_MAPS_API_KEY,
         'form': form,
         'is_home': True,
     }, context_instance=RequestContext(request))
