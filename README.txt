@@ -5,7 +5,7 @@ MINITAGE.DJANGO BUILDOUT FOR bv.client
 WARNING ABOUT BUILOOUT BOOTSTRAP WARNING
 --------------------------------------------
 
-        !!!    Be sure to use zc.buildout >= 1.4.3, or you ll have errors or bugs.    !!!
+        !!!    Be sure to use zc.buildout >= 1.5.0 or you ll have errors or bugs.    !!!
 
 If you are using the standalone (choose to answer inside_minitage=no), you must ensure to do the
 $python bootstrap.py dance with a python compatible with the targeted zope installation (python 2.4/plone3 python 2.6/plone4)
@@ -42,9 +42,10 @@ INSTALLING THIS PROJECT VITH MINITAGE
 
 DEVELOP MODE
 ---------------
-To develop your application, run the ``(minitage.)buildout-dev.cfg`` buildout, it extends this one but:
+To develop your application, run the ``(minitage.)buildout-dev.cfg`` buildout:
+
   * it comes with development tools.
-  * it configures the instance to be more verbose (debug mode & verbose security)
+  * it configures the instance to be more verbose
   * it has only one instance and not all the hassles from production.
 
 
@@ -96,39 +97,18 @@ SYSTEM ADMINISTRATORS RELATED FILES
     |-- high-availability.cfg   -> Project production settings like supervision, loadbalancer and so on
     |-- maintenance.cfg         -> Project maintenance settings (crons, logs)
     `-- settings.cfg            -> various settings (crons hours, hosts, installation paths, ports, passwords)
+    `-- settings-prod.cfg       -> TO BE MANUAL CREATED IN PRODUCTION : production critical settings like passwords.
 
 
 CRONS
 ~~~~~~
 ::
 
-    |-- etc/cron_scripts/fss_daily.sh   -> backup script for fss
-
-DELIVERANCE SUPPORT
------------------------
-
-To setup correctly the reverse proxy front end:
-*PLEASE READ THE REVERSE PROXY SECTION BELOW*
+    |-- etc/cron_scripts/backup_pgsql.sh   -> backup script for pgsql
 
 
-Layout
+SETTINGS
 ~~~~~~~~~
-::
-
-    |-- etc/deliverance
-        `-- etc/deliverance/deliverance.xml      -> Main Deliverance rules file
-    |-- etc/templates
-        `-- etc/templates/deliverance/deliverance.xml.in      -> Main Deliverance rules file template
-
-notes
-~~~~~~~~~~~~~~
-- deliverance is launched and monitored with supervisord
-- Deliverance do not use the proxy mode but *the WSGI middleware*, and use PasteDeploy to fire the server.
-  The part triggering its contruction is ``deliverance_ini`` && ``deliverance_prod_ini``
-- Settings can be as usual changed by editing ``etc/sys/settings.cfg``
-  * hosts:deliverance / ports:deliverance / locations:deliverance-themes -> The deliverance server itself  & the default theme
-  * hosts:deliverance-backend / ports:deliverance-backend  -> The proxied backend (eg: zope server):
-In development mode, we switched the host and url of the deliveranced host to be the development instance instead of either haproxy or the first instance.
 
 
 REVERSE PROXY
@@ -140,29 +120,13 @@ We generate two virtualhosts for a cliassical apache setup, mostly ready but fee
     |-- 100-bv.client.reverseproxy.deliverance.conf         -> a vhost for use with a plone behind a deliverance server.
     `-- apache.cfg
     etc/templates/apache/
-    |-- 100-bv.client.reverseproxy.conf.in                   -> Template for a vhost for ruse with a standalone plone (even with haproxy in front of.)
-    `-- 100-bv.client.reverseproxy.deliverance.conf.in       -> Template for a vhost for use with a plone behind a deliverance server.
+    |-- 100-bv.client.reverseproxy.conf.in                  -> Template for a vhost for ruse with a standalone plone (even with haproxy in front of.)
+    `-- 100-bv.client.reverseproxy.deliverance.conf.in      -> Template for a vhost for use with a plone behind a deliverance server.
 
 In settings.cfg you have now some settings for declaring which host is your reverse proxy backend & the vhost mounting:
+
     * hosts:zope-front / ports:zope-front                              -> zope front backend
     * reverseproxy:host / reverseproxy:port / reverseproxy:mount-point -> host / port / mountpoint on the reverse proxy)
-
-CONFIGURATION TEMPLATES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-::
-
-    etc/templates/
-    |-- balancer.conf.template      -> haproxy template.
-    |                                  Copy or ln the generated file 'etc/loadbalancing/balancer.conf' to your haproxy installation if any.
-    |-- fss_daily.sh.in             -> FSS daily backup script template
-    `-- logrotate.conf.template     -> logrotate configuration file template for your Zope logs
-    `-- supervisor.initd            -> template for supervisor init script
-
-
-BACKENDS
-~~~~~~~~~~~
-::
-
 
 
 KGS FILE
@@ -173,34 +137,11 @@ This file will be generated the first time that you run buildout.
 To un it, just run bin/buildout -vvvvvvc <CONFIG_FILE> install kgs
 To unlock the versions, cmment out the according statement ``etc/project/bv.client-kgs}.cfg`` in the extends option of the bv.client.cfg gile.
 
+PRODUCTION
+-----------
 
-CONTINEOUS INTEGRATION
-~~~~~~~~~~~~~~~~~~~~~~~~~
-Here ae the files needed for our hudson integration.
-
-For hudson we provide some shell helpers more or less generated to run 'a build':
-
-    - an helper which set some variables in the current environement for others helpers
-    - an helper which update the project
-    - an helper which update the associated sources grabbed via mr.developer
-    - an helper which run all the tests
-
-This is described in details on the related configuration files you will find in the layout below.
-::
-
-    |-- etc/hudson/
-    |   `-- bv.client
-    |       |-- build
-    |           |-- build.sh               -> the project build helper
-    |           |-- test.sh                -> the project test executor helper (launch all tests needed)
-    |           |-- update_mrdeveloper.sh  -> update sources grabbed via mrdeveloper
-    |           `-- update_project.sh      -> update this layout
-    |
-    |-- etc/templates/hudson/
-        `-- bv.client
-            |-- build
-            |   `-- activate_env.sh.in   -> buildout template to generate etc/hudson/bv.client/build/activate.env.sh
-            `-- config.xml.in            -> buildout template to generate etc/hudson/bv.client/config.xml (hudson job/build file)
+    You have some backups than you can enable in the buildout-prod.cfg, specially for the pgsql cron scripts and its related cron.
+    Think that the user for the postgresql cron must be authorized to connect locally without password.
 
 A word about minitage.paste instances
 --------------------------------------
@@ -252,4 +193,4 @@ For example, to add a postgresql instance to your project, you will have to issu
     * Then to start the postgres : zope/bv.client/sys/etc/init.d/bv.client_postgresql restart
 
 
-# vim:set ft=rst:
+# vim:set ft=rest:
