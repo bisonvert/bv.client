@@ -12,6 +12,9 @@ var interval_max_radius = 1;
 var trip_pg = 10;
 var trip_updater = new TripUpdater(trip_pg, trip_type, true);
 
+var trip_offers_updater = new TripUpdater(trip_pg, TYPE_OFFER, false);
+var trip_demands_updater = new TripUpdater(trip_pg, TYPE_DEMAND, false);
+
 var departure_ready = true;
 var departure_sync = true;
 var arrival_ready = true;
@@ -22,14 +25,14 @@ completeDragMarker = function(marker, pixel) {
     if (!marker) return;
     departure_sync = false;
     arrival_sync = false;
-    if (trip_type == TYPE_DEMAND) {
+    if (trip_type != TYPE_DEMAND) {
         removeRoute();
     } else {
         displayDepartureRadiusCircle();
         displayArrivalRadiusCircle();
     }
     getTrips(true);
-    if (trip_type == TYPE_DEMAND) {
+    if (trip_type != TYPE_DEMAND) {
         setDirections();
     }
     // check if it is not a result marker
@@ -62,7 +65,7 @@ completeDragMarker = function(marker, pixel) {
 function setDeparturePoint(point, text) {
     hideMarkerPopup(departure_marker);
     markers.removeFeatures([departure_marker]);
-    var marker_style = (trip_type == TYPE_OFFER) ? departure_passenger_style : departure_car_style;
+    var marker_style = (trip_type != TYPE_OFFER) ? departure_passenger_style : departure_car_style;
     departure_marker = new OpenLayers.Feature.Vector(
         point,
         {id: "d", name: text},
@@ -70,7 +73,7 @@ function setDeparturePoint(point, text) {
         departure_style
     );
     markers.addFeatures([departure_marker]);
-    if (trip_type == TYPE_OFFER) {
+    if (trip_type != TYPE_OFFER) {
         displayDepartureRadiusCircle();
     }
 }
@@ -109,7 +112,7 @@ function departurePointGeocoder() {
 function setArrivalPoint(point, text) {
     hideMarkerPopup(arrival_marker);
     markers.removeFeatures([arrival_marker]);
-    var marker_style = (trip_type == TYPE_OFFER) ? arrival_passenger_style : arrival_car_style;
+    var marker_style = (trip_type != TYPE_OFFER) ? arrival_passenger_style : arrival_car_style;
     arrival_marker = new OpenLayers.Feature.Vector(
         point,
         {id: "a", name: text},
@@ -117,7 +120,7 @@ function setArrivalPoint(point, text) {
         arrival_style
     );
     markers.addFeatures([arrival_marker]);
-    if (trip_type == TYPE_OFFER) {
+    if (trip_type != TYPE_OFFER) {
         displayArrivalRadiusCircle();
     }
 }
@@ -169,7 +172,7 @@ function removeRoute() {
 }
 
 function displayDepartureRadiusCircle() {
-    if (trip_type == TYPE_DEMAND) return;
+    if (trip_type != TYPE_OFFER) return;
     removeDepartureRadiusCircle();
     departure_poly = new OpenLayers.Feature.Vector(getCircle(departure_marker.geometry, trip_radius), null, buffer_style);
     trip_layer.addFeatures([departure_poly]);
@@ -183,7 +186,7 @@ function removeDepartureRadiusCircle() {
 }
 
 function displayArrivalRadiusCircle() {
-    if (trip_type == TYPE_DEMAND) return;
+    if (trip_type != TYPE_DEMAND) return;
     removeArrivalRadiusCircle();
     arrival_poly = new OpenLayers.Feature.Vector(getCircle(arrival_marker.geometry, trip_radius), null, buffer_style);
     trip_layer.addFeatures([arrival_poly]);
@@ -199,7 +202,7 @@ function removeArrivalRadiusCircle() {
 function getTrips(redraw_route) {
     // wait for geocoding
     if (departure_ready && arrival_ready) {
-        if (trip_type == TYPE_DEMAND && redraw_route) {
+        if (trip_type != TYPE_DEMAND && redraw_route) {
             removeRoute();
             setDirections();
         }
@@ -215,7 +218,7 @@ function getTrips(redraw_route) {
 }
 
 function retrieveTrips() {
-    if (trip_type == TYPE_OFFER || trip_route != null) {
+    if (trip_type == TYPE_DEMAND || trip_route != null) {
         $('wait').show();
         new Ajax.Request('/trips/get_matching_trips/', { method:'post',
             parameters: {
@@ -231,16 +234,21 @@ function retrieveTrips() {
                     ),
 
                 arrival_sync: arrival_sync,
-                geometry: (trip_type == TYPE_DEMAND) ? wkt.write(new OpenLayers.Feature.Vector(trip_route.geometry)) : "",
-                interval_min_radius: 7-interval_min_radius,
-                interval_max_radius: interval_max_radius,
+                geometry: (trip_type != TYPE_DEMAND) ? wkt.write(new OpenLayers.Feature.Vector(trip_route.geometry)) : "",
+                interval_min: 7-interval_min_radius,
+                interval_max: interval_max_radius,
                 date: $('id_date').getValue(),
-                radius: trip_radius,
+                offer_radius: (trip_type != TYPE_DEMAND) ? trip_radius : 0,
+                demand_radius: (trip_type != TYPE_OFFER) ? trip_radius : 0,
                 trip_type: trip_type
             },
             onSuccess: function(transport){
                 var json = transport.responseText.evalJSON();
-                trip_updater.updateTrips(json.trips, json.authenticated);
+                if (trip_type != TYPE_DEMAND)
+                    trip_demands_updater.updateTrips(json.trips, json.authenticated);
+                if (trip_type != TYPE_OFFER)
+                    trip_offers_updater.updateTrips(json.trips, json.authenticated);
+                // trip_updater.updateTrips(json.trips, json.authenticated);
                 $('wait').hide();
             },
             onFailure: function() {
@@ -305,7 +313,7 @@ onSlideRadius = function(v) {
 onChangeRadius = function(v) {
     onSlideRadius(v);
     trip_radius = (v == 0) ? 500 : v;
-    if (trip_type == TYPE_DEMAND) {
+    if (trip_type != TYPE_DEMAND) {
         calculateSimpleTripBuffer(trip_route, map, trip_radius, null, trip_layer);
     } else {
         displayDepartureRadiusCircle();
@@ -452,7 +460,7 @@ $('form_search_trip').observe('submit', function(event) {
 
 if ($('form_save_trip')) {
     $('form_save_trip').observe('submit', function(event) {
-		if (trip_type == TYPE_OFFER){
+		if (trip_type != TYPE_OFFER){
 			var verbose_trip_name = gettext("Demand");
 			var radius_name = 'id_demand-radius';
 		} else {
@@ -462,7 +470,7 @@ if ($('form_save_trip')) {
 		$('id_departure_city').value = $('id_departure_name').value;
 		$('id_arrival_city').value = $('id_arrival_name').value;
 		$(radius_name).value = trip_radius;
-		$('id_trip_type').value = (trip_type == TYPE_OFFER) ? 1 : 0;
+		$('id_trip_type').value = trip_type;
 		$('id_name').value = $('id_departure_name').value + " - " + $('id_arrival_name').value + " (" + verbose_trip_name + ")";
 		$('form_search_trip').action = search_trip_url;
 		$('form_search_trip').submit();

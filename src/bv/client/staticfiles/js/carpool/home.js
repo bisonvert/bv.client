@@ -70,11 +70,13 @@ function submitForm(btn_element_id, type_value) {
 }
 
 $('btn_search_demand').observe('click', function(event) {
-    checkFields('btn_search_demand', 1);
+    // 1: TYPE_OFFER
+    checkFields('btn_search_demand', 0);
 })
 
 $('quick_search_form').observe('submit', function(event) {
-    checkFields('btn_search_offer', 0, event);
+    // 1: TYPE_DEMAND
+    checkFields('btn_search_offer', 1, event);
 })
 
 callbackDeparture = function(element, query) {

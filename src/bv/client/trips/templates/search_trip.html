@@ -93,14 +93,14 @@
                 <div id="trip_container">
                     <div id="result_title" class="result_title">{% trans "Trip results" %}</div>
                     <div id="trip_list">
-                        {% if trip_type %}
+                        {% if not trip_type %}
                         <div id="trip_list_content_d" class="trip_list_content"> </div>
                         {% else %}
                         <div id="trip_list_content_o" class="trip_list_content"> </div>
                         {% endif %}
                     </div>
                     <div id="trip_pages">
-                        {% if trip_type %}
+                        {% if not trip_type %}
                         <div id="trip_pages_d"> </div>
                         {% else %}
                         <div id="trip_pages_o"> </div>
@@ -144,7 +144,7 @@
 {% endblock %}
 
 {% block ol_map_events %}
-    {% if trip_type %}
+    {% if not trip_type %}
     map.events.register("moveend", map, function() {
         calculateSimpleTripBuffer(trip_route, map, trip_radius, 'wait', trip_layer);
     });
@@ -182,7 +182,7 @@
     arrival_marker.style = arrival_style;
     markers.addFeatures([arrival_marker]);
 
-    {% if trip_type %}
+    {% if not trip_type %}
     setDirections();
     {% endif %}
 
