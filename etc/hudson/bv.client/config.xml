@@ -28,19 +28,19 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>/opt/minitage/django/bv.client-prod/etc/hudson/bv.client/build/update_mrdeveloper.sh</command>
+      <command>/home/sim/minitage/django/bv.client/etc/hudson/bv.client/build/update_mrdeveloper.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>/opt/minitage/django/bv.client-prod/etc/hudson/bv.client/build/update_project.sh</command>
+      <command>/home/sim/minitage/django/bv.client/etc/hudson/bv.client/build/update_project.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>/opt/minitage/django/bv.client-prod/etc/hudson/build/build.sh</command>
+      <command>/home/sim/minitage/django/bv.client/etc/hudson/build/build.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>/opt/minitage/django/bv.client-prod/etc/hudson/bv.client/build/update_mrdeveloper.sh</command>
+      <command>/home/sim/minitage/django/bv.client/etc/hudson/bv.client/build/update_mrdeveloper.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>/opt/minitage/django/bv.client-prod/etc/hudson/build/test.sh</command>
+      <command>/home/sim/minitage/django/bv.client/etc/hudson/build/test.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
