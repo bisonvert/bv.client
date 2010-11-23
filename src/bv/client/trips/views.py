@@ -109,6 +109,7 @@ def show_trip_results(request, trip_id=None, lib=None):
         trip = lib.edit_trip(trip_id, **trip_details)
 
     return render_to_response('show_trip_results.html', {
+        'gmapkey': settings.GOOGLE_MAPS_API_KEY,
         'trip': trip,
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
@@ -187,6 +188,7 @@ def show_trip(request, trip_id=None, lib=None):
 
     """
     return render_to_response('show_trip.html', {
+        'gmapkey': settings.GOOGLE_MAPS_API_KEY,
         'trip': lib.get_trip(trip_id),
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
@@ -303,6 +305,7 @@ def create_trip(request, trip_id=None, trip_from_search=False, lib=None):
         'default_zoom': settings.DEFAULT_MAP_CENTER_ZOOM, 
         'default_center': settings.DEFAULT_MAP_CENTER_POINT,
         'is_trip': True,
+        'gmapkey': settings.GOOGLE_MAPS_API_KEY,
     }
     if trip_id:
         view_dict['trip'] = trip
