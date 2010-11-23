@@ -29,6 +29,7 @@ setup(
     url = 'http://bitbucket.org/bisonvert/bv.client',
     install_requires = [
             'bv.libclient',
+            'simplejson',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
