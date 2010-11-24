@@ -10,4 +10,4 @@ setTimeout(this.fixIEOverlapping.bind(this),50);this.active=true;obj_this=this;a
 this.options.onHide(this.element,this.panel);if(this.iefix)
 Element.hide(this.iefix);this.active=false;},toggle:function(){if(this.active)
 this.hide();else
-this.show();}});autocomplete_url="/ajax/get_city/";autocomplete_paramName="value";autocomplete_frequency=0.2;autocomplete_minChars=3;
+this.show();}});autocomplete_url="/trips/get_city/";autocomplete_paramName="value";autocomplete_frequency=0.2;autocomplete_minChars=3;
