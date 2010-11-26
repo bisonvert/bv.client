@@ -328,7 +328,8 @@ def create_return_trip(request, trip_id=None, lib=None):
     """Given an existing trip, pre-fill the field to create a return trip and
     redirect the user to the create trip action.
     """
-    pass
+### FIXME: code the feature !
+    return render_to_response('404.html', context_instance=RequestContext(request))
 
 def edit_trip(request, trip_id=None):
     """Edit a trip.

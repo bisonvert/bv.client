@@ -15,7 +15,7 @@ urlpatterns = patterns('bv.client.trips.views',
     (r'^list/(?P<page>\d+)/$', 'list_trips', {}, 'list'),
     (r'^edit/(?P<trip_id>\d+)/$', 'edit_trip', {}, 'edit'),
     (r'^create/$', 'create_trip', {}, 'create'),
-    (r'^create_return_trip/$', 'create_return_trip', {}, 'create_return_trip'),
+    (r'^create_return_trip/(?P<trip_id>\d+)$', 'create_return_trip', {}, 'create_return_trip'),
     (r'^delete/(?P<trip_id>\d+)/$', 'delete_trip', {}, 'delete'),
     
     (r'^search/(?P<trip_type>\d)$', 'search_trip', {}, 'search'),
