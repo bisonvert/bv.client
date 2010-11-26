@@ -267,9 +267,9 @@ def create_trip(request, trip_id=None, trip_from_search=False, lib=None):
                         for key,value in f.cleaned_data.items():
                             finaldict.setdefault(key, value)
                 if trip_id:
-                    lib.edit_trip(trip_id=trip_id, **unicode_to_dict(dict(request.POST.lists())))
+                    lib.edit_trip(trip_id=trip_id, **unicode_to_dict(dict(request.POST.items())))
                 else:
-                    trip = lib.add_trip(**unicode_to_dict(dict(request.POST.lists())))
+                    trip = lib.add_trip(**unicode_to_dict(dict(request.POST.items())))
                 if request.POST['return_trip'] == 'true':
                     return redirect(reverse('trips:create_return_trip', args=[trip.id]))
                 else:
